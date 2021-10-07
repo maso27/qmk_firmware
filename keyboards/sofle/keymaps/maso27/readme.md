@@ -1,7 +1,5 @@
 # VIA keymap for Sofle RGB from keyhive
 
-Layout in [Keyboard Layout Editor](http://www.keyboard-layout-editor.com/#/gists/76efb423a46cbbea75465cb468eef7ff) and [adjust layer](http://www.keyboard-layout-editor.com/#/gists/4bcf66f922cfd54da20ba04905d56bd4)
-
 Features:
 
 -   "Gaming" layer changes I,J,K,L to arrows.  Enabled with right encoder press.
@@ -13,14 +11,18 @@ Features:
 
 ## Flashing
 
-My keyboard has pro micro on left as master, standard arduino on right as slave.
+My keyboard has pro micro on the left, Elite C arduino on the right.
+I use the EE_HANDS method of left/right delineation so I program the eeprom of each board with a left or right definition file.
+These files (eeprom-lefthand.eep and eeprom-righthand.eep) are found in qmk_firmware/quantum/split_common.
 
-Flash using the correct command below:
+Flash (in Linux) using the correct commands below:
 
 ```sh
 # for pro micro-based builds
+avrdude -p atmega32u4 -P usb -c flip1 -U eeprom:w:eeprom-lefthand.eep
 avrdude -p atmega32u4 -P usb -c flip1 -U flash:w:<compiledfile.hex>
 
 # for Elite C or dfu bootloader builds
-qmk flash
+avrdude -p atmega32u4 -P /dev/ttyACM0 -c avr109 -U eeprom:w:eeprom-righthand.eep
+avrdude -p atmega32u4 -P /dev/ttyACM0 -c avr109 -U flash:w:<compiledfile.hex>
 ```
