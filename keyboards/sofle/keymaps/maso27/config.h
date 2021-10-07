@@ -24,13 +24,9 @@ for more options.
 
 #define EE_HANDS
 
-#define OLED_TIMEOUT 120000
-#define OLED_BRIGHTNESS 100
-
 //Add RGB underglow
 #define RGB_DI_PIN D3
-#define RGBLED_NUM 74
-#define RGBLED_SPLIT {37,37}
+#define RGBLED_NUM 7
 
 #ifdef RGBLIGHT_ENABLE
 	
@@ -48,7 +44,6 @@ for more options.
 	#define RGBLIGHT_SLEEP
 
     //#define RGBLIGHT_LAYERS
-    #define RGBLIGHT_LIMIT_VAL 120
     #define RGBLIGHT_HUE_STEP 10
     #define RGBLIGHT_SAT_STEP 17
     #define RGBLIGHT_VAL_STEP 17
