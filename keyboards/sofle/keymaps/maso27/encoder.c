@@ -23,13 +23,13 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         if (clockwise) {
             if(shift_held) {
-                tap_code(KC_VOLU);
+                tap_code(KC_MNXT);
             } else {
                 tap_code(KC_RIGHT);
             }
         } else {
             if(shift_held) {
-                tap_code(KC_VOLD);
+                tap_code(KC_MPRV);
             } else {
                 tap_code(KC_LEFT);
             }
@@ -37,13 +37,13 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     } else if (index == 1) {
         if (clockwise) {
             if(shift_held) {
-                tap_code(KC_MNXT);
+                tap_code(KC_VOLU);
             } else {
                 tap_code(KC_DOWN);
             }
         } else {
             if(shift_held) {
-                tap_code(KC_MPRV);
+                tap_code(KC_VOLD);
             } else {
                 tap_code(KC_UP);
             }
