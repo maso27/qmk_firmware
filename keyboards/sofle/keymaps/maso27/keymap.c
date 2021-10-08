@@ -299,8 +299,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // Light underglow blue when in standard mode
     const rgblight_segment_t PROGMEM my_base_layer[] = RGBLIGHT_LAYER_SEGMENTS(
         {0, 8, HSV_BLUE},      // Light 8 LEDs, starting with LED 0 (UNDERGLOW)
-        {9, 1, HSV_PURPLE},
-        {46, 1, HSV_GREEN},
+        {8, 1, HSV_BLUE},      // (SPACE)
+        {9, 1, HSV_PURPLE},    // (LOWER)
+        {10, 27, HSV_BLUE},    // (LEFT HAND)
+        {45, 1, HSV_BLUE},     // (SPACE)
+        {46, 1, HSV_GREEN},    // (RAISE)
+        {47, 27, HSV_BLUE},    // (RIGHT HAND)
         {37, 8, HSV_BLUE}      // (UNDERGLOW)
     );
 
