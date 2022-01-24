@@ -42,6 +42,7 @@ enum custom_keycodes {
     KC_PRVWD = LCTL(KC_LEFT),
     KC_NXTWD = LCTL(KC_RIGHT),
     KC_DLINE = LCTL(KC_BSPC),
+    KC_CTLALTDEL = LCTL(LALT(KC_DEL)),
     KC_BSPC_DEL
 };
 
@@ -104,8 +105,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|RGBNext|    |RGBOff |------+------+------+------+------+------|
  * |      |  =   |  -   |  +   |   {  |   }  |-------|    |-------|   [  |   ]  |   ;  |   :  |   \  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            |      |      |      |      | /       /       \      \  |      |      |      |      |
- *            |      |      |      |      |/       /         \      \ |      |      |      |      |
+ *            |CtlAlt|      |      |      | /       /       \      \  |      |      |      |      |
+ *            |  Del |      |      |      |/       /         \      \ |      |      |      |      |
  *            `---------------------------'-------'           '------''---------------------------'
  */
 [_LOWER] = LAYOUT(
@@ -113,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_F12,
   _______, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                         KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE,
   _______,  KC_EQL, KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR,  RGB_MOD,      RGB_TOG, KC_LBRC, KC_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
-                    _______, _______, _______, _______, _______,        _______, _______, _______, _______, _______
+               KC_CTLALTDEL, _______, _______, _______, _______,        _______, _______, _______, _______, _______
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -257,7 +258,8 @@ const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 );
 const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
   SET_LAYER_ID(HSV_PURPLE),
-  SET_FNROW(HSV_PURPLE)
+  SET_FNROW(HSV_PURPLE),
+  {7,1,HSV_PURPLE} // ctl-alt-del on windows key
 );
 const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
   SET_LAYER_ID(HSV_GREEN),
