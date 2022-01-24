@@ -72,7 +72,8 @@
     // Light LEDs 11 & 12 in purple when keyboard layer 2 is active
     const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
         SET_UNDERGLOW(HSV_PURPLE),
-        SET_FN_KEYS(HSV_PURPLE)
+        SET_FN_KEYS(HSV_PURPLE),
+        {11, 1, HSV_PURPLE} // Ctrl-Alt-Del on windows key
     );
     // Light LEDs 13 & 14 in green when keyboard layer 3 is active
     const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
