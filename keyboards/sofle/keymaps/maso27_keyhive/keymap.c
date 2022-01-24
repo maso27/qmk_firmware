@@ -23,9 +23,10 @@
 
 enum custom_keycodes {
     PLACEHOLDER = SAFE_RANGE,  // can always be here (4 bytes)
-    KC_PRVWD,
-    KC_NXTWD,
-    KC_DWORD
+    KC_PRVWD = LCTL(KC_LEFT),
+    KC_NXTWD = LCTL(KC_RIGHT),
+    KC_DWORD = LCTL(KC_BSPC),
+    KC_CTLALTDEL = LCTL(LALT(KC_DEL))
     //CYCLE                      // cycle through first BASE_LAYERS (62 bytes)
 };
 
@@ -122,8 +123,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |< E >| RGBDN |------+------+------+------+------+------|
  * |      |  =   |  -   |  +   |   {  |   }  |-------|  R  |-------|   [  |   ]  |   ;  |   :  |   \  |      |
  * `-----------------------------------------/       /      \      \-----------------------------------------'
- *            |      |      |      |      | /       /        \      \  |      |      |      |      |
- *            |      |      |      |      |/       /          \      \ |      |      |      |      |
+ *            |CtlAlt|      |      |      | /       /        \      \  |      |      |      |      |
+ *            |  Del |      |      |      |/       /          \      \ |      |      |      |      |
  *            `-----------------------------------'            '------''---------------------------'
  */
 [_LOWER] = LAYOUT_via(
@@ -131,7 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, KC_1   , KC_2   , KC_3   , KC_4   , KC_5   , _______,       RGB_VAI, KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_F12 ,
   _______, KC_EXLM, KC_AT  , KC_HASH, KC_DLR , KC_PERC, _______,       RGB_TOG, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE,
   _______, KC_EQL , KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR, _______,       RGB_VAD, KC_LBRC, KC_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
-                  _______, _______, _______, _______, _______,           _______, _______, _______, _______, _______
+             KC_CTLALTDEL, _______, _______, _______, _______,           _______, _______, _______, _______, _______
 ),
 /* RAISE
  * ,----------------------------------------.                      ,-----------------------------------------.
@@ -167,33 +168,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 /*         case CYCLE:
             set_single_persistent_default_layer((1+get_highest_layer(default_layer_state)) % BASE_LAYERS);
             break; */
-        case KC_PRVWD:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LCTL));
-                register_code(KC_LEFT);
-            } else {
-                unregister_mods(mod_config(MOD_LCTL));
-                unregister_code(KC_LEFT);
-            }
-            break;
-        case KC_NXTWD:
-             if (record->event.pressed) {
-                register_mods(mod_config(MOD_LCTL));
-                register_code(KC_RIGHT);
-            } else {
-                unregister_mods(mod_config(MOD_LCTL));
-                unregister_code(KC_RIGHT);
-            }
-            break;
-        case KC_DWORD:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LCTL));
-                register_code(KC_BSPC);
-            } else {
-                unregister_mods(mod_config(MOD_LCTL));
-                unregister_code(KC_BSPC);
-            }
-            break;
     }
 
     // this uses less memory than returning in each case.
