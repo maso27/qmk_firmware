@@ -37,7 +37,7 @@
         {14, 2, HSV_OVERRIDE_HELP(hsv, OVERRIDE_BRIGHTNESS)}, \
         {20, 1, HSV_OVERRIDE_HELP(hsv, OVERRIDE_BRIGHTNESS)}
     #define SET_FN_KEYS(hsv) \
-        {5, 2, hsv}, {17, 2, hsv}, {29, 2, hsv}, \
+        {6, 1, hsv}, {17, 2, hsv}, {29, 2, hsv}, \
         {43, 2, hsv}, {55, 2, hsv}, {67, 2, hsv}, {70, 1, hsv}
      
     /*  RGB LAYER STUFF  */
