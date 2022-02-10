@@ -79,18 +79,19 @@
     const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
         SET_UNDERGLOW(HSV_GREEN),
         SET_ARROWS(HSV_WHITE),
-        {32, 1, HSV_RED}, // caps lock
+        {32, 1, HSV_RED},   // caps lock
         {19, 1, HSV_GREEN}, // menu
         {15, 1, HSV_GREEN}, // printscreen
-        {7, 1, HSV_GREEN}, // insert
+        {7, 1, HSV_GREEN},  // insert
         {41, 2, HSV_GREEN}, // pgup / pgdown
         {46, 1, HSV_GREEN}, // prev word
         {49, 1, HSV_GREEN}, // home
         {58, 1, HSV_GREEN}, // next word
         {61, 1, HSV_GREEN}, // end
-        {66, 1, HSV_RED}, // delete word
-        {68, 1, HSV_RED}, // backspace
-        {70,1,HSV_RED} // delete
+        {66, 1, HSV_RED},   // delete word
+        {68, 1, HSV_RED},   // backspace
+        {70,1,HSV_RED},     // delete
+        {73,1,HSV_GREEN}    // enter (no shift)
        
     );
     // Light underglow red when caps lock is active. Hard to ignore!

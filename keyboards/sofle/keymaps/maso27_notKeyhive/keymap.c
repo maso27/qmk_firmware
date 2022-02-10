@@ -41,8 +41,8 @@ enum custom_keycodes {
     KC_RAISE,
     KC_PRVWD = LCTL(KC_LEFT),
     KC_NXTWD = LCTL(KC_RIGHT),
-    KC_DLINE = LCTL(KC_BSPC),
-    KC_CTLALTDEL = LCTL(LALT(KC_DEL)),
+    KC_DWORD = LCTL(KC_BSPC),
+    KC_CTLALTDEL = LCA(KC_DEL),
     KC_KILL = LALT(KC_F4),
     KC_BSPC_DEL
 };
@@ -57,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |LShift|   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
  * |------+------+------+------+------+------| Mute  |    | GAMING|------+------+------+------+------+------|
- * | LCTR |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |Enter |
+ * | LCTR |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |Ent/Shft |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *            | LGUI | LAlt | RCTR |LOWER | / Bspc  /       \Space \  |Raise |  `   |  =   |  \   |
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINS,
   KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC, // KC_BSPC_DEL,
   KC_LSFT,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,  KC_QUOT,
-  KC_LCTRL,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE,     TG(_GAMING),KC_N, KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
+  KC_LCTRL,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE,     TG(_GAMING),KC_N, KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_SFTENT,
                  KC_LGUI,KC_LALT, KC_RCTRL, MO(_LOWER), KC_BSPC,   KC_SPC, MO(_RAISE), KC_GRV, KC_EQL, KC_BSLS
 ),
 
@@ -121,11 +121,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |  XX  |  XX  | XX   |  XX  |  XX  |                    | XX   |  XX  | XX   | XX   | XX   | BkSpc|
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      | Ins  | Pscr | Menu |  XX  |  XX  |                    | PgUp | PWrd |  Up  | NWrd | DLine| Del  |
+ * |      | Ins  | Pscr | Menu |  XX  |  XX  |                    | PgUp | PWrd |  Up  | NWrd | DWord| Del  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |  XX  |  XX  |  XX  |  XX  | Caps |-------.    ,-------| PgDn | Left | Down | Right| XX   | XX   |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |  XX  |  XX  |  XX  |  XX  | XX   |-------|    |-------| XX   | Home | XX   | End  | XX   |      |
+ * |      |  XX  |  XX  |  XX  |  XX  | XX   |-------|    |-------| XX   | Home | XX   | End  | XX   | Enter|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *            |      |      |      |      | /  Del  /       \      \  |      |      |      |      |
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
@@ -133,9 +133,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_RAISE] = LAYOUT(
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC,
-  _______,  KC_INS, KC_PSCR,  KC_APP, XXXXXXX, XXXXXXX,                        KC_PGUP, KC_PRVWD,  KC_UP, KC_NXTWD,KC_DLINE, KC_DEL,
+  _______,  KC_INS, KC_PSCR,  KC_APP, XXXXXXX, XXXXXXX,                        KC_PGUP, KC_PRVWD,  KC_UP, KC_NXTWD,KC_DWORD, KC_DEL,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_CAPS,                        KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  _______,      _______,  XXXXXXX, KC_HOME,XXXXXXX, KC_END,XXXXXXX, _______,
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  _______,      _______,  XXXXXXX, KC_HOME,XXXXXXX, KC_END,XXXXXXX, KC_ENT,
                       _______, _______, _______, _______,  KC_DEL,      _______, _______, _______, _______, _______
 )
 };
@@ -270,6 +270,7 @@ const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
   {20,1,HSV_GREEN},
   {23,1,HSV_GREEN},
   {34,1,HSV_RED},   // capslock
+  {44,1,HSV_GREEN}, // enter (no shift)
   {46,2,HSV_GREEN}, // bkspc-del
   {49,1,HSV_RED},   // delete word
   {54,1,HSV_GREEN}, // end
