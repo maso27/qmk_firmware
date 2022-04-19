@@ -6,3 +6,4 @@ ENCODER_ENABLE = yes
 LTO_ENABLE = yes
 OLED_ENABLE = yes
 OLED_DRIVER = SSD1306
+SRC += features/layer_lock.c
