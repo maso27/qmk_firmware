@@ -55,6 +55,8 @@
 
 uint8_t apa102_led_brightness = APA102_DEFAULT_BRIGHTNESS;
 
+void static apa102_init(void);
+
 void static apa102_start_frame(void);
 void static apa102_end_frame(uint16_t num_leds);
 
@@ -65,6 +67,7 @@ void apa102_setleds(LED_TYPE *start_led, uint16_t num_leds) {
     LED_TYPE *end = start_led + num_leds;
 
     apa102_start_frame();
+    apa102_init();
     for (LED_TYPE *led = start_led; led < end; led++) {
         apa102_send_frame(led->r, led->g, led->b, apa102_led_brightness);
     }
@@ -94,6 +97,9 @@ void apa102_set_brightness(uint8_t brightness) {
 
 void static apa102_send_frame(uint8_t red, uint8_t green, uint8_t blue, uint8_t brightness) {
     apa102_send_byte(0b11100000 | brightness);
+/* MSS    apa102_send_byte(blue);
+    apa102_send_byte(green);
+    apa102_send_byte(red); */
     uint8_t red_send, green_send, blue_send;
     red_send = (red >> 1) | 0x80;
     green_send = (green >> 1) | 0x80;
@@ -102,9 +108,6 @@ void static apa102_send_frame(uint8_t red, uint8_t green, uint8_t blue, uint8_t 
     apa102_send_byte(blue_send);
     apa102_send_byte(red_send);
     apa102_send_byte(green_send);
-    // apa102_send_byte(blue);
-    // apa102_send_byte(green);
-    // apa102_send_byte(red);
 }
 
 void static apa102_start_frame(void) {
@@ -143,7 +146,9 @@ void static apa102_end_frame(uint16_t num_leds) {
     for (uint16_t i = 0; i < iterations; i++) {
         apa102_send_byte(0);
     }
-
+/*    for (uint16_t i = 0; i < 3; i++) {
+        apa102_send_byte(0);
+    }*/
     apa102_init();
 }
 

@@ -16,6 +16,7 @@
   */
 
 #include QMK_KEYBOARD_H
+#include "features/layer_lock.h"
 
 
 // Base layer is the number of layers CYCLE selects from.
@@ -26,7 +27,9 @@ enum custom_keycodes {
     KC_PRVWD = LCTL(KC_LEFT),
     KC_NXTWD = LCTL(KC_RIGHT),
     KC_DWORD = LCTL(KC_BSPC),
-    KC_CTLALTDEL = LCTL(LALT(KC_DEL))
+    KC_CTLALTDEL = LCTL(LALT(KC_DEL)),
+    KC_KILL = LALT(KC_F4),
+    LLOCK = SAFE_RANGE  // layer lock key
     //CYCLE                      // cycle through first BASE_LAYERS (62 bytes)
 };
 
@@ -115,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |  F1  |  F2  |  F3  |  F4  |  F5  |-------.  E  ,-------|  F6  |  F7  |  F8  |  F9  | F10  | F11  |
+ * |ALTF4 |  F1  |  F2  |  F3  |  F4  |  F5  |-------.  E  ,-------|  F6  |  F7  |  F8  |  F9  | F10  | F11  |
  * |------+------+------+------+------+------|RGBSpd+|< N >| RGBUP |------+------+------+------+------+------|
  * |      |   1  |   2  |   3  |   4  |   5  |-------.  C  ,-------|   6  |   7  |   8  |   9  |   0  | F12  |
  * |------+------+------+------+------+------|RGBNext|< O >|  RGB  |------+------+------+------+------+------|
@@ -123,20 +126,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|RGBSpd-|< E >| RGBDN |------+------+------+------+------+------|
  * |      |  =   |  -   |  +   |   {  |   }  |-------|  R  |-------|   [  |   ]  |   ;  |   :  |   \  |      |
  * `-----------------------------------------/       /      \      \-----------------------------------------'
- *            |CtlAlt|      |      |      | /       /        \      \  |      |      |      |      |
- *            |  Del |      |      |      |/       /          \      \ |      |      |      |      |
+ *            |CtlAlt|      |      |      | /       /        \      \  | Layer|      |      |      |
+ *            |  Del |      |      |      |/       /          \      \ | Lock |      |      |      |
  *            `-----------------------------------'            '------''---------------------------'
  */
 [_LOWER] = LAYOUT_via(
-  _______, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                         KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 ,
+  KC_KILL, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                         KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 ,
   _______, KC_1   , KC_2   , KC_3   , KC_4   , KC_5   , RGB_SPI,       RGB_VAI, KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_F12 ,
   _______, KC_EXLM, KC_AT  , KC_HASH, KC_DLR , KC_PERC, RGB_MOD,       RGB_TOG, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE,
   _______, KC_EQL , KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR, RGB_SPD,       RGB_VAD, KC_LBRC, KC_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
-             KC_CTLALTDEL, _______, _______, _______, _______,           _______, _______, _______, _______, _______
+             KC_CTLALTDEL, _______, _______, _______, _______,           _______,  LLOCK, _______, _______, _______
 ),
 /* RAISE
  * ,----------------------------------------.                      ,-----------------------------------------.
- * |      |      |      |      |      |      |-------.  E  ,-------|      |      |      |      |      | Bspc |
+ * |      |  XX  |  XX  |  XX  |  XX  |  XX  |-------.  E  ,-------|  XX  |  XX  |  XX  |  XX  |  XX  | Bspc |
  * |------+------+------+------+------+------|       |< N >|       |------+------+------+------+------+------|
  * |      | Ins  | Pscr | Menu |  XX  |  XX  |-------.  C  ,-------| PgUp | PWrd |  Up  | NWrd | DWord| Del  |
  * |------+------+------+------+------+------|       |< O >|       |------+------+------+------+------+------|
@@ -144,31 +147,35 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |< E >|       |------+------+------+------+------+------|
  * |      |  XX  |  XX  |  XX  |  XX  |  XX  |-------|  R  |-------|  XX  | Home |  XX  |  End |  XX  | Enter|
  * `-----------------------------------------/      /       \      \-----------------------------------------'
- *            |      |      |      |      | / Del  /         \      \  |      |      |      |      |
- *            |      |      |      |      |/      /           \      \ |      |      |      |      |
+ *            |      |      |      | Layer| / Del  /         \      \  |      |      |      |      |
+ *            |      |      |      | Lock |/      /           \      \ |      |      |      |      |
  *            `----------------------------------'             '------''---------------------------'
  */
 [_RAISE] = LAYOUT_via(
-  _______, _______, _______, _______, _______ , _______,                       _______, _______, _______, _______, _______, KC_BSPC,
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC,
   _______, KC_INS , KC_PSCR, KC_APP , XXXXXXX , XXXXXXX, _______,    _______,  KC_PGUP,KC_PRVWD, KC_UP  ,KC_NXTWD,KC_DWORD, KC_DEL,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX , KC_CAPS, _______,    _______,  KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX , XXXXXXX, _______,    _______,  XXXXXXX, KC_HOME, XXXXXXX,  KC_END, XXXXXXX, KC_ENT,
-                   _______, _______, _______, _______,  KC_DEL,        _______, _______, _______, _______, _______
+                   _______, _______, _______,   LLOCK,  KC_DEL,        _______, _______, _______, _______, _______
 )
 };
 
 // Custom keycode handling.
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // handling this once instead of in each keycode uses less program memory.
-     if ((keycode >= SAFE_RANGE) && !(record->event.pressed)) {
-         return false;
-     }
-
-    switch (keycode) {
-/*         case CYCLE:
-            set_single_persistent_default_layer((1+get_highest_layer(default_layer_state)) % BASE_LAYERS);
-            break; */
+    if ((keycode >= SAFE_RANGE) && !(record->event.pressed)) {
+        return false;
     }
+
+    // layer lock code
+    if (!process_layer_lock(keycode, record, LLOCK)) { return false; }
+
+
+/*    switch (keycode) {
+         case CYCLE:
+            set_single_persistent_default_layer((1+get_highest_layer(default_layer_state)) % BASE_LAYERS);
+            break;
+    } */
 
     // this uses less memory than returning in each case.
     return keycode < SAFE_RANGE;

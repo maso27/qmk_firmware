@@ -22,31 +22,23 @@
 //#define EE_HANDS
 // #define SPLIT_USB_DETECT
 
-
-// remove this if I fix the pinout
-#undef MATRIX_COL_PINS
-#undef MATRIX_ROW_PINS
-#define MATRIX_COL_PINS { F6, F7, B1, B3, B2, B6 }
-#define MATRIX_ROW_PINS { D4, C6, D7, E6, B4, B5 }
-
 #ifdef ENCODER_ENABLE
-    // #define ENCODER_DIRECTION_FLIP
     #define ENCODERS_PAD_A          {F5}
     #define ENCODERS_PAD_B          {F4}
-    #define ENCODERS_PAD_A_RIGHT    {F4}
-    #define ENCODERS_PAD_B_RIGHT    {F5}
-    // #define ENCODER_RESOLUTIONS  { 4, 2 }  // Left encoder seems to have double-output issue but right does not.
+    #define ENCODERS_PAD_A_RIGHT    {F5}
+    #define ENCODERS_PAD_B_RIGHT    {F4}
 #endif
+
 // More lighting options in quantum/rgblight/rgblight.h
 #ifdef RGBLIGHT_ENABLE
-    #define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_RAINBOW_SWIRL+2
+    #define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_RAINBOW_MOOD+2
 
     // Disabling some of these is a good way to save flash space.
     // #define RGBLIGHT_EFFECT_ALTERNATING     // 108
     // #define RGBLIGHT_EFFECT_RGB_TEST        // 158
-    // #define RGBLIGHT_EFFECT_RAINBOW_MOOD    // 160
+    #define RGBLIGHT_EFFECT_RAINBOW_MOOD    // 160
     // #define RGBLIGHT_EFFECT_STATIC_GRADIENT // 168
-    #define RGBLIGHT_EFFECT_RAINBOW_SWIRL   // 192
+    // #define RGBLIGHT_EFFECT_RAINBOW_SWIRL   // 192
     // #define RGBLIGHT_EFFECT_BREATHING       // 348
     // #define RGBLIGHT_EFFECT_KNIGHT          // 336
     // #define RGBLIGHT_EFFECT_SNAKE           // 406
@@ -58,8 +50,13 @@
     #define RGBLIGHT_MAX_LAYERS 5
     
     #undef RGBLED_NUM
-    #define RGBLED_NUM 72 // will need to change this
-    /* apa102 RGB LED */
+    // #define RGBLED_NUM 16
+    // #define RGBLED_SPLIT {8,8}
+    #define RGBLED_NUM 36
+    #define RGBLED_SPLIT {18,18}
+    
+    /* lpd8806 RGB LED */
+    #define APA102_DEFAULT_BRIGHTNESS 5
     #define RGB_DI_PIN D3
     #define RGB_CI_PIN D2
     

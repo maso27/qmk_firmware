@@ -18,6 +18,7 @@
 #include <stdio.h>
 
 #include QMK_KEYBOARD_H
+#include "features/layer_lock.h"
 
 #define INDICATOR_BRIGHTNESS 30
 #define KEY_BRIGHTNESS 40
@@ -35,8 +36,7 @@ enum sofle_layers {
 };
 
 enum custom_keycodes {
-    KC_QWERTY = SAFE_RANGE,
-    KC_GAMING,
+    PLACEHOLDER = SAFE_RANGE,
     KC_LOWER = MO(_LOWER), // LT(_LOWER,KC_LPRN), // lower layer when held, parentheses when tapped
     KC_RAISE = MO(_RAISE), // LT(_RAISE,KC_RPRN),
     KC_PRVWD = LCTL(KC_LEFT),
@@ -44,7 +44,7 @@ enum custom_keycodes {
     KC_DWORD = LCTL(KC_BSPC),
     KC_CTLALTDEL = LCA(KC_DEL),
     KC_KILL = LALT(KC_F4),
-    KC_BSPC_DEL
+    LLOCK = SAFE_RANGE  // layer lock key
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -60,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | LCTR |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |Ent/Shft |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *            | LGUI | LAlt | RCTR |LOWER | / Bspc  /       \Space \  |Raise |  `   |  =   |  \   |
- *            |      |      |      |  (   |/       /         \      \ |  )   |      |      |      |
+ *            |      |      |      |      |/       /         \      \ |      |      |      |      |
  *            `---------------------------'-------'           '------''---------------------------'
  */
 
@@ -106,8 +106,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|RGBNext|    |RGBOff |------+------+------+------+------+------|
  * |      |  =   |  -   |  +   |   {  |   }  |-------|    |-------|   [  |   ]  |   ;  |   :  |   \  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            |CtlAlt|      |      |      | /       /       \      \  |      |      |      |      |
- *            |  Del |      |      |      |/       /         \      \ |      |      |      |      |
+ *            |CtlAlt|      |      |      | /       /       \      \  | Layer|      |      |      |
+ *            |  Del |      |      |      |/       /         \      \ | Lock |      |      |      |
  *            `---------------------------'-------'           '------''---------------------------'
  */
 [_LOWER] = LAYOUT(
@@ -115,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_F12,
   _______, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                         KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE,
   _______,  KC_EQL, KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR,  RGB_MOD,      RGB_TOG, KC_LBRC, KC_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
-               KC_CTLALTDEL, _______, _______, _______, _______,        _______, _______, _______, _______, _______
+               KC_CTLALTDEL, _______, _______, _______, _______,         LLOCK, _______, _______, _______, _______
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -127,8 +127,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |  XX  |  XX  |  XX  |  XX  | XX   |-------|    |-------| XX   | Home | XX   | End  | XX   | Enter|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            |      |      |      |      | /  Del  /       \      \  |      |      |      |      |
- *            |      |      |      |      |/       /         \      \ |      |      |      |      |
+ *            |      |      |      | Layer| /  Del  /       \      \  |      |      |      |      |
+ *            |      |      |      | Lock |/       /         \      \ |      |      |      |      |
  *            `---------------------------'-------'           '------''---------------------------'
  */
 [_RAISE] = LAYOUT(
@@ -136,41 +136,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,  KC_INS, KC_PSCR,  KC_APP, XXXXXXX, XXXXXXX,                        KC_PGUP, KC_PRVWD,  KC_UP, KC_NXTWD,KC_DWORD, KC_DEL,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_CAPS,                        KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  _______,      _______,  XXXXXXX, KC_HOME,XXXXXXX, KC_END,XXXXXXX, KC_ENT,
-                      _______, _______, _______, _______,  KC_DEL,      _______, _______, _______, _______, _______
+                      _______, _______, _______,  LLOCK,  KC_DEL,      _______, _______, _______, _______, _______
 )
 };
 
-bool shift_held = false;
-static uint16_t held_shift = 0;
-
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-
-        /* Smart Backspace Delete (also controls volume knob)*/
-        case KC_RSFT:
-        case KC_LSFT:
-            shift_held = record->event.pressed;
-            held_shift = keycode;
-            break;
-        /*case KC_BSPC_DEL:
-            if (record->event.pressed) {
-                if (shift_held) {
-                    unregister_code(held_shift);
-                    register_code(KC_DEL);
-                } else {
-                    register_code(KC_BSPC);
-                }
-            } else {
-                unregister_code(KC_DEL);
-                unregister_code(KC_BSPC);
-                if (shift_held) {
-                    register_code(held_shift);
-                }
-            }
-            return false;*/
+    // handling this once instead of in each keycode uses less program memory.
+    if ((keycode >= SAFE_RANGE) && !(record->event.pressed)) {
+        return false;
     }
-    return true;
+    
+    // layer lock code
+    if (!process_layer_lock(keycode, record, LLOCK)) { return false; }
+
+    // this uses less memory than returning in each case.
+    return keycode < SAFE_RANGE;
 }
 
 #ifdef RGBLIGHT_ENABLE

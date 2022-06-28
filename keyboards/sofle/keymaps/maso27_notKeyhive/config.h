@@ -23,8 +23,6 @@
 ///https://thomasbaart.nl/2018/12/01/reducing-firmware-size-in-qmk/
 
 
-// #define MASTER_LEFT
-// #define MASTER_RIGHT
 #define EE_HANDS // also need to program left and right EEPROMs
 
 #define CUSTOM_FONT
@@ -70,7 +68,6 @@
 	//#define RGBLIGHT_EFFECT_TWINKLE
 
     #define RGBLED_NUM 72
-	//#define RGBLED_SPLIT
 	#define RGBLED_SPLIT { 36, 36 } // haven't figured out how to use this yet
 
 	//#define RGBLED_NUM 30
