@@ -6,4 +6,5 @@ ENCODER_ENABLE = yes
 LTO_ENABLE = yes
 OLED_ENABLE = yes
 OLED_DRIVER = SSD1306
+CAPS_WORD_ENABLE = yes
 SRC += features/layer_lock.c

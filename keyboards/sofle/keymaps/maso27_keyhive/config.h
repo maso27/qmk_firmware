@@ -26,6 +26,8 @@ for more options.
 */
 #define EE_HANDS
 
+#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
+
 // More lighting options in quantum/rgblight/rgblight.h
 #ifdef RGBLIGHT_ENABLE
     #define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_RAINBOW_SWIRL+2

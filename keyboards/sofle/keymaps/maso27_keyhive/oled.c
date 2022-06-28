@@ -94,7 +94,7 @@ static void print_status_narrow(void) {
     
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
-            oled_write("Base", false);
+            oled_write("Base ", false);
             break;
         case _GAMING:
             oled_write("Games", false);
@@ -112,7 +112,9 @@ static void print_status_narrow(void) {
     // CAPS LOCK
     oled_set_cursor(0,8);
     led_t led_usb_state = host_keyboard_led_state();
-    oled_write("CPSLK", led_usb_state.caps_lock);
+    oled_write("CAPS  LOCK", led_usb_state.caps_lock);
+    oled_set_cursor(0,11);
+    oled_write("CAPS  WORD", is_caps_word_on());
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {

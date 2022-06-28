@@ -27,6 +27,7 @@
 // #define MASTER_RIGHT
 #define EE_HANDS // also need to program left and right EEPROMs
 
+#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
 #define CUSTOM_FONT
 
 #define CUSTOM_LAYER_READ //if you remove this it causes issues - needs better guarding
