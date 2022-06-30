@@ -22,6 +22,8 @@
 //#define EE_HANDS
 // #define SPLIT_USB_DETECT
 
+#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
+
 #ifdef ENCODER_ENABLE
     #define ENCODERS_PAD_A          {F5}
     #define ENCODERS_PAD_B          {F4}
