@@ -20,8 +20,8 @@
 #ifdef ENCODER_ENABLE
     static uint8_t encoder_state[2] = {0};
     //Use these keymap positions to specify the encoder functions on rotate.
-    static keypos_t encoder_ccw[2] = {{6, 3}, {6, 8}};
-    static keypos_t encoder_cw[2] = {{6, 1}, {6, 6}};
+    static keypos_t encoder_ccw[2] = {{6, 3}, {6, 6}};
+    static keypos_t encoder_cw[2] = {{6, 1}, {6, 8}};
 
     void encoder_action_unregister(void) {
         for (int index = 0; index < 2; ++index) {

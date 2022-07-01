@@ -58,11 +58,11 @@
     #define RGBLED_SPLIT {18,18}
     
     /* lpd8806 RGB LED */
-    #define APA102_DEFAULT_BRIGHTNESS 5
+    #define LPD8806_DEFAULT_BRIGHTNESS 20
     #define RGB_DI_PIN D3
     #define RGB_CI_PIN D2
     
-    #define RGBLIGHT_LIMIT_VAL 120
+    #define RGBLIGHT_LIMIT_VAL 100
     #define RGBLIGHT_HUE_STEP 10
     #define RGBLIGHT_SAT_STEP 17
     #define RGBLIGHT_VAL_STEP 17

@@ -52,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *               |      |      |   /       / LOWER / Bspc  /      \ Space \ RAISE \       \   |      |      |
    *               '-------------'  '-------/       /       /        \       \       \-------'  '-------------'
    *                                       /---------------/          \---------------\
-   *                                      / Rctrl / Home  /            \  End  \   `   \
+   *                                      / Rctrl / Home  /            \  End  \   -   \
    *                                     /       /       /              \       \       \
    *                                    '---------------'                '---------------'
    */
@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    KC_LSFT, KC_A   , KC_S   , KC_D   , KC_F   , KC_G   ,                                     KC_H   , KC_J   , KC_K   , KC_L   , KC_SCLN, KC_QUOT,
    KC_LCTRL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   ,                                     KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH,  KC_SFTENT,
                      KC_LGUI, KC_LALT,       KC_MUTE,MO(_LOWER),KC_BSPC,   KC_SPC ,MO(_RAISE),TG(_GAMING),    KC_EQL, KC_BSLS,
-                                                      KC_RCTRL, KC_HOME , KC_END , KC_GRV
+                                                      KC_RCTRL, KC_HOME , KC_END , KC_MINS
    ),
   [_GAMING] = LAYOUT_5x6_5(
   /* GAMING
@@ -74,8 +74,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
    * |      |      |      |      |      |      |                                  |      |      |      |      |      |      |
    * '-----------------------------------------/                                  \-----------------------------------------'
-   *               |      |      |    /       /---------------.    .---------------\       \    |      |      |
-   *               |      |      |   /       /       / Space /      \       \       \       \   |      |      |
+   *               |      |      |    / Left- /---------------.    .---------------\       \    |      |      |
+   *               |      |      |   /  Click/       / Space /      \       \       \       \   |      |      |
    *               '-------------'  '-------/       /       /        \       \       \-------'  '-------------'
    *                                       /---------------/          \---------------\
    *                                      /       /       /            \       \       \
@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    _______, _______, _______, _______, _______, _______,                                     _______, _______,   KC_UP, _______, _______, _______,
    _______, _______, _______, _______, _______, _______,                                     _______, KC_LEFT, KC_DOWN,KC_RIGHT, _______, _______,
    _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
-                     _______, _______,          _______, _______,  KC_SPC, _______, _______, _______,          _______, _______,
+                     _______, _______,       KC_MS_BTN1, _______,  KC_SPC, _______, _______, _______,          _______, _______,
                                                          _______, _______, _______, _______
    ),
   [_LOWER] = LAYOUT_5x6_5(
@@ -303,20 +303,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         if (clockwise) {
-            if(layer_state_is(_RAISE)) {
+            if (layer_state_is(_RAISE)) {
                 tap_code(KC_VOLU);
+	    } else if (layer_state_is(_GAMING)) {
+		tap_code(KC_MS_RIGHT);
     #ifdef RGBLIGHT_ENABLE
-            } else if(layer_state_is(_LOWER)) {
+            } else if (layer_state_is(_LOWER)) {
                 rgblight_increase_val_noeeprom();
     #endif
             } else {
                 tap_code(KC_RIGHT);
             }
         } else {
-            if(layer_state_is(_RAISE)) {
+            if (layer_state_is(_RAISE)) {
                 tap_code(KC_VOLD);
+	    } else if (layer_state_is(_GAMING)) {
+		tap_code(KC_MS_LEFT);
     #ifdef RGBLIGHT_ENABLE
-            } else if(layer_state_is(_LOWER)) {
+            } else if (layer_state_is(_LOWER)) {
                 rgblight_decrease_val_noeeprom();
     #endif
             } else {
@@ -325,25 +329,25 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         }
     } else if (index == 1) {
         if (clockwise) {
+            if (layer_state_is(_GAMING)) {
+		tap_code(KC_MS_UP);
     #ifdef RGBLIGHT_ENABLE
-            if(layer_state_is(_LOWER)) {
+	    } else if (layer_state_is(_LOWER)) {
                 rgblight_increase_speed_noeeprom();
-            } else {
     #endif
+            } else {
                 tap_code(KC_UP); // (KC_DOWN);
-    #ifdef RGBLIGHT_ENABLE
             }
-    #endif
         } else {
+            if (layer_state_is(_GAMING)) {
+		tap_code(KC_MS_DOWN);
     #ifdef RGBLIGHT_ENABLE
-            if(layer_state_is(_LOWER)) {
+            } else if (layer_state_is(_LOWER)) {
                 rgblight_decrease_speed_noeeprom();
+    #endif
             } else {
-    #endif
                 tap_code(KC_DOWN); // (KC_UP);
-    #ifdef RGBLIGHT_ENABLE
             }
-    #endif
         }
     }
     return true;

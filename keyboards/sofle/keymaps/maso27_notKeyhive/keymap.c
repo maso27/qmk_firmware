@@ -60,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------| Mute  |    | GAMING|------+------+------+------+------+------|
  * | LCTR |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |Ent/Shft |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            | LGUI | LAlt | RCTR |LOWER | / Bspc  /       \Space \  |Raise |  `   |  =   |  \   |
+ *            | LGUI | LAlt | RCTR |LOWER | / Bspc  /       \Space \  |Raise |  -   |  =   |  \   |
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
  *            `---------------------------'-------'           '------''---------------------------'
  */
@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,    KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC, // KC_BSPC_DEL,
   KC_LSFT,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,  KC_QUOT,
   KC_LCTRL,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE, TG(_GAMING),KC_N, KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_SFTENT,
-                 KC_LGUI,KC_LALT, KC_RCTRL, KC_LOWER, KC_BSPC,   KC_SPC, KC_RAISE, KC_GRV, KC_EQL, KC_BSLS
+                 KC_LGUI,KC_LALT, KC_RCTRL, KC_LOWER, KC_BSPC,   KC_SPC, KC_RAISE, KC_MINS, KC_EQL, KC_BSLS
 ),
 
 
@@ -428,34 +428,40 @@ bool oled_task_user(void) {
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         if (clockwise) {
-            if(layer_state_is(_LOWER)) {
+            if (layer_state_is(_LOWER)) {
                 rgblight_increase_val_noeeprom();
-            }
-            else if(layer_state_is(_RAISE)) {
+            } else if (layer_state_is(_RAISE)) {
                 tap_code(KC_VOLU);
+	    } else if (layer_state_is(_GAMING)) {
+		tap_code(KC_MS_RIGHT);
             } else {
                 tap_code(KC_RIGHT);
             }
         } else {
-            if(layer_state_is(_LOWER)) {
+            if (layer_state_is(_LOWER)) {
                 rgblight_decrease_val_noeeprom();
-            }
-            else if(layer_state_is(_RAISE)) {
+            } else if (layer_state_is(_RAISE)) {
                 tap_code(KC_VOLD);
+	    } else if (layer_state_is(_GAMING)) {
+		tap_code(KC_MS_LEFT);
             } else {
                 tap_code(KC_LEFT);
             }
         }
     } else if (index == 1) {
         if (clockwise) {
-            if(layer_state_is(_LOWER)) {
+            if (layer_state_is(_LOWER)) {
                 rgblight_increase_speed_noeeprom();
+	    } else if (layer_state_is(_GAMING)) {
+		tap_code(KC_MS_UP);
             } else {
                 tap_code(KC_UP); // (KC_DOWN);
             }
         } else {
-            if(layer_state_is(_LOWER)) {
+            if( layer_state_is(_LOWER)) {
                 rgblight_decrease_speed_noeeprom();
+	    } else if (layer_state_is(_GAMING)) {
+		tap_code(KC_MS_DOWN);
             } else {
                 tap_code(KC_DOWN); // (KC_UP);
             }
