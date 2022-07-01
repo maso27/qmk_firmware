@@ -5,4 +5,7 @@ RGBLIGHT_ENABLE = yes
 RGBLIGHT_DRIVER = LPD8806
 CAPS_WORD_ENABLE = yes
 MOUSEKEY_ENABLE = yes
+POINTING_DEVICE_ENABLE = yes
+POINTING_DEVICE_DRIVER = custom
 SRC += features/layer_lock.c
+SRC += features/etchamouse.c

@@ -15,6 +15,7 @@
 
 #include QMK_KEYBOARD_H
 #include "features/layer_lock.h"
+#include "features/etchamouse.h"
 
 enum layer_names {
   _DEFAULTS = 0,
@@ -301,12 +302,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
+  #ifdef POINTING_DEVICE_ENABLE
+    if (layer_state_is(_GAMING)) {
+        encoder_update_mouse(index, clockwise);
+    } else
+  #endif  
     if (index == 0) {
         if (clockwise) {
             if (layer_state_is(_RAISE)) {
                 tap_code(KC_VOLU);
-	    } else if (layer_state_is(_GAMING)) {
-		tap_code(KC_MS_RIGHT);
+//	    } else if (layer_state_is(_GAMING)) {
+//                tap_code(KC_MS_RIGHT);
     #ifdef RGBLIGHT_ENABLE
             } else if (layer_state_is(_LOWER)) {
                 rgblight_increase_val_noeeprom();
@@ -317,8 +323,8 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         } else {
             if (layer_state_is(_RAISE)) {
                 tap_code(KC_VOLD);
-	    } else if (layer_state_is(_GAMING)) {
-		tap_code(KC_MS_LEFT);
+//	    } else if (layer_state_is(_GAMING)) {
+//		tap_code(KC_MS_LEFT);
     #ifdef RGBLIGHT_ENABLE
             } else if (layer_state_is(_LOWER)) {
                 rgblight_decrease_val_noeeprom();
@@ -329,24 +335,26 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         }
     } else if (index == 1) {
         if (clockwise) {
-            if (layer_state_is(_GAMING)) {
-		tap_code(KC_MS_UP);
+	    if (layer_state_is(_LOWER)) {
+//            if (layer_state_is(_GAMING)) {
+//		tap_code(KC_MS_DOWN);
     #ifdef RGBLIGHT_ENABLE
-	    } else if (layer_state_is(_LOWER)) {
-                rgblight_increase_speed_noeeprom();
-    #endif
-            } else {
-                tap_code(KC_UP); // (KC_DOWN);
-            }
-        } else {
-            if (layer_state_is(_GAMING)) {
-		tap_code(KC_MS_DOWN);
-    #ifdef RGBLIGHT_ENABLE
-            } else if (layer_state_is(_LOWER)) {
+//	    } else if (layer_state_is(_LOWER)) {
                 rgblight_decrease_speed_noeeprom();
     #endif
             } else {
-                tap_code(KC_DOWN); // (KC_UP);
+                tap_code(KC_DOWN);
+            }
+        } else {
+	    if (layer_state_is(_LOWER)) {
+//            if (layer_state_is(_GAMING)) {
+//		tap_code(KC_MS_UP);
+    #ifdef RGBLIGHT_ENABLE
+//            } else if (layer_state_is(_LOWER)) {
+                rgblight_increase_speed_noeeprom();
+    #endif
+            } else {
+                tap_code(KC_UP);
             }
         }
     }
