@@ -15,7 +15,6 @@
 
 #include QMK_KEYBOARD_H
 #include "features/layer_lock.h"
-#include "features/etchamouse.h"
 
 enum layer_names {
   _DEFAULTS = 0,
@@ -53,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *               |      |      |   /       / LOWER / Bspc  /      \ Space \ RAISE \       \   |      |      |
    *               '-------------'  '-------/       /       /        \       \       \-------'  '-------------'
    *                                       /---------------/          \---------------\
-   *                                      / Rctrl / Home  /            \  End  \   -   \
+   *                                      / Rctrl / Home  /            \  End  \   ~   \
    *                                     /       /       /              \       \       \
    *                                    '---------------'                '---------------'
    */
@@ -62,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    KC_LSFT, KC_A   , KC_S   , KC_D   , KC_F   , KC_G   ,                                     KC_H   , KC_J   , KC_K   , KC_L   , KC_SCLN, KC_QUOT,
    KC_LCTRL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   ,                                     KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH,  KC_SFTENT,
                      KC_LGUI, KC_LALT,       KC_MUTE,MO(_LOWER),KC_BSPC,   KC_SPC ,MO(_RAISE),TG(_GAMING),    KC_EQL, KC_BSLS,
-                                                      KC_RCTRL, KC_HOME , KC_END , KC_MINS
+                                                      KC_RCTRL, KC_HOME , KC_END , KC_GRV
    ),
   [_GAMING] = LAYOUT_5x6_5(
   /* GAMING
@@ -302,59 +301,56 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
-  #ifdef POINTING_DEVICE_ENABLE
-    if (layer_state_is(_GAMING)) {
-        encoder_update_mouse(index, clockwise);
-    } else
-  #endif  
     if (index == 0) {
         if (clockwise) {
             if (layer_state_is(_RAISE)) {
-                tap_code(KC_VOLU);
-//	    } else if (layer_state_is(_GAMING)) {
-//                tap_code(KC_MS_RIGHT);
+                tap_code(KC_RIGHT);
+	    } else if (layer_state_is(_GAMING)) {
+                tap_code(KC_MS_RIGHT);
     #ifdef RGBLIGHT_ENABLE
             } else if (layer_state_is(_LOWER)) {
                 rgblight_increase_val_noeeprom();
     #endif
             } else {
-                tap_code(KC_RIGHT);
+                tap_code(KC_VOLU);
             }
         } else {
             if (layer_state_is(_RAISE)) {
-                tap_code(KC_VOLD);
-//	    } else if (layer_state_is(_GAMING)) {
-//		tap_code(KC_MS_LEFT);
+                tap_code(KC_LEFT);
+	    } else if (layer_state_is(_GAMING)) {
+		tap_code(KC_MS_LEFT);
     #ifdef RGBLIGHT_ENABLE
             } else if (layer_state_is(_LOWER)) {
                 rgblight_decrease_val_noeeprom();
     #endif
             } else {
-                tap_code(KC_LEFT);
+                tap_code(KC_VOLD);
             }
         }
     } else if (index == 1) {
         if (clockwise) {
-	    if (layer_state_is(_LOWER)) {
-//            if (layer_state_is(_GAMING)) {
-//		tap_code(KC_MS_DOWN);
+            if (layer_state_is(_RAISE)) {
+                tap_code(KC_DOWN);
+            } else if (layer_state_is(_GAMING)) {
+		tap_code(KC_MS_DOWN);
     #ifdef RGBLIGHT_ENABLE
-//	    } else if (layer_state_is(_LOWER)) {
+	    } else if (layer_state_is(_LOWER)) {
                 rgblight_decrease_speed_noeeprom();
     #endif
             } else {
-                tap_code(KC_DOWN);
+                tap_code(KC_WH_D);
             }
         } else {
-	    if (layer_state_is(_LOWER)) {
-//            if (layer_state_is(_GAMING)) {
-//		tap_code(KC_MS_UP);
+            if (layer_state_is(_RAISE)) {
+                tap_code(KC_UP);
+            } else if (layer_state_is(_GAMING)) {
+		tap_code(KC_MS_UP);
     #ifdef RGBLIGHT_ENABLE
-//            } else if (layer_state_is(_LOWER)) {
+            } else if (layer_state_is(_LOWER)) {
                 rgblight_increase_speed_noeeprom();
     #endif
             } else {
-                tap_code(KC_UP);
+                tap_code(KC_WH_U);
             }
         }
     }
