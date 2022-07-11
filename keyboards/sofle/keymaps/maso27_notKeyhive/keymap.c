@@ -82,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      |                    |      |      |  Up  |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------.    ,-------|      | Left | Down | Right|      |      |
- * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ * |------+------+------+------+------+------|LtClick|    |       |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *            |      |      |      |      | / Space /       \      \  |      |      |      |      |
@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______ , _______ , _______ , _______ , _______,                          _______,  _______, _______,  _______,  _______,_______,
   _______, _______ , _______ , _______ , _______ , _______,                          _______,  _______,   KC_UP,  _______,  _______,_______,
   _______, _______ , _______ , _______ , _______ , _______,                          _______,  KC_LEFT, KC_DOWN, KC_RIGHT,  _______,_______,
-  _______, _______ , _______ , _______ , _______ , _______,  _______,      _______,  _______,  _______, _______,  _______,  _______,_______,
+  _______, _______ , _______ , _______ , _______ , _______, KC_MS_BTN1,    _______,  _______,  _______, _______,  _______,  _______,_______,
                          _______, _______, _______, _______, KC_SPC,       _______, _______, _______, _______, _______
 ),
 /* LOWER
@@ -431,39 +431,43 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             if (layer_state_is(_LOWER)) {
                 rgblight_increase_val_noeeprom();
             } else if (layer_state_is(_RAISE)) {
-                tap_code(KC_VOLU);
+                tap_code(KC_RIGHT);
 	    } else if (layer_state_is(_GAMING)) {
 		tap_code(KC_MS_RIGHT);
             } else {
-                tap_code(KC_RIGHT);
+                tap_code(KC_VOLU);
             }
         } else {
             if (layer_state_is(_LOWER)) {
                 rgblight_decrease_val_noeeprom();
             } else if (layer_state_is(_RAISE)) {
-                tap_code(KC_VOLD);
+                tap_code(KC_LEFT);
 	    } else if (layer_state_is(_GAMING)) {
 		tap_code(KC_MS_LEFT);
             } else {
-                tap_code(KC_LEFT);
+                tap_code(KC_VOLD);
             }
         }
     } else if (index == 1) {
         if (clockwise) {
             if (layer_state_is(_LOWER)) {
                 rgblight_increase_speed_noeeprom();
+            } else if (layer_state_is(_RAISE)) {
+                tap_code(KC_UP);
 	    } else if (layer_state_is(_GAMING)) {
 		tap_code(KC_MS_UP);
             } else {
-                tap_code(KC_UP); // (KC_DOWN);
+                tap_code(KC_WH_U); // scroll wheel up
             }
         } else {
             if( layer_state_is(_LOWER)) {
                 rgblight_decrease_speed_noeeprom();
+            } else if (layer_state_is(_RAISE)) {
+                tap_code(KC_DOWN);
 	    } else if (layer_state_is(_GAMING)) {
 		tap_code(KC_MS_DOWN);
             } else {
-                tap_code(KC_DOWN); // (KC_UP);
+                tap_code(KC_WH_D); // scroll wheel down
             }
         }
     }
