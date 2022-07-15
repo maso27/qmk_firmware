@@ -73,17 +73,17 @@ static void print_status_narrow(void) {
     
     oled_set_cursor(0,3);
 
-    switch (get_highest_layer(default_layer_state)) {
-        case _QWERTY:
-            oled_write("QWRTY", false);
-            break;
-        case _GAMING:
-            oled_write("GAMES", false);
-            break;
-        default:
-            oled_write("UNDEF", false);
-            break;
-    }
+//    switch (get_highest_layer(default_layer_state)) {
+//         case _QWERTY:
+           oled_write("QWRTY", false);
+//            break;
+//         case _GAMING:
+//            oled_write("GAMES", false);
+//            break;
+//        default:
+//            oled_write("UNDEF", false);
+//            break;
+//    }
     
     oled_set_cursor(0,5);
     

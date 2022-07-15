@@ -39,6 +39,9 @@
     #define SET_FN_KEYS(hsv) \
         {6, 1, hsv}, {17, 2, hsv}, {29, 2, hsv}, \
         {43, 2, hsv}, {55, 2, hsv}, {67, 2, hsv}, {70, 1, hsv}
+    #define SET_BRACKETS(hsv) \
+        {24, 1, hsv}, {33, 1, hsv}, \
+        {40, 1, hsv}, {49, 1, hsv}
      
     /*  RGB LAYER STUFF  */
     /*
@@ -67,12 +70,16 @@
     const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
         SET_UNDERGLOW(HSV_WHITE),
         SET_WASD(HSV_WHITE),
-        SET_ARROWS(HSV_WHITE)
+        SET_ARROWS(HSV_WHITE),
+        {35, 1, HSV_WHITE}
     );
     // Light LEDs 11 & 12 in purple when keyboard layer 2 is active
     const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
         SET_UNDERGLOW(HSV_PURPLE),
         SET_FN_KEYS(HSV_PURPLE),
+        SET_BRACKETS(HSV_PURPLE),
+        {0, 1, HSV_PURPLE}, // Rctrl on Control key
+        {5, 1, HSV_RED},    // Alt-F4 Kill
         {11, 1, HSV_PURPLE} // Ctrl-Alt-Del on windows key
     );
     // Light LEDs 13 & 14 in green when keyboard layer 3 is active

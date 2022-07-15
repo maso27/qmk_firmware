@@ -60,17 +60,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------| Mute  |    | GAMING|------+------+------+------+------+------|
  * | LCTR |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |Ent/Shft |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            | LGUI | LAlt | RCTR |LOWER | / Bspc  /       \Space \  |Raise |  ~   |  =   |  \   |
- *            |      |      |      |      |/       /         \      \ |      |      |      |      |
+ *            | LGUI | LAlt |MACRO |LOWER | / Bspc  /       \Space \  |Raise |  -   |  =   |  \   |
+ *            |      |      | Play |      |/       /         \      \ |      |      |      |      |
  *            `---------------------------'-------'           '------''---------------------------'
  */
 
 [_QWERTY] = LAYOUT(
-  KC_GESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINS,
-  KC_TAB,    KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC, // KC_BSPC_DEL,
+  QK_GESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINS,
+  KC_TAB,    KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC,
   KC_LSFT,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,  KC_QUOT,
   KC_LCTRL,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE, TG(_GAMING),KC_N, KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_SFTENT,
-                 KC_LGUI,KC_LALT, KC_RCTRL, KC_LOWER, KC_BSPC,   KC_SPC, KC_RAISE, KC_GRV, KC_EQL, KC_BSLS
+                 KC_LGUI,KC_LALT, DM_PLY1, KC_LOWER, KC_BSPC,   KC_SPC, KC_RAISE, KC_MINS, KC_EQL, KC_BSLS
 ),
 
 
@@ -105,9 +105,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |   !  |   @  |   #  |   $  |   %  |-------.    ,-------|   ^  |   &  |   *  |   (  |   )  |   |  |
  * |------+------+------+------+------+------|RGBNext|    |RGBOff |------+------+------+------+------+------|
- * |      |  =   |  -   |  +   |   {  |   }  |-------|    |-------|   [  |   ]  |   ;  |   :  |   \  |      |
+ * | RCTR |  =   |  -   |  +   |   {  |   }  |-------|    |-------|   [  |   ]  |   ;  |   :  |   \  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            |CtlAlt|      |      |      | /Shift- /       \      \  | Layer|      |      |      |
+ *            |CtlAlt|      |      |      | /Shift- /       \      \  | Layer|  ~   |      |      |
  *            |  Del |      |      |      |/  Del  /         \      \ | Lock |      |      |      |
  *            `---------------------------'-------'           '------''---------------------------'
  */
@@ -115,8 +115,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_KILL,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                         KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
   _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_F12,
   _______, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                         KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE,
-  _______,  KC_EQL, KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR,  RGB_MOD,      RGB_TOG, KC_LBRC, KC_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
-               KC_CTLALTDEL, _______, _______, _______, KC_SH_DEL,     _______,   LLOCK, _______, _______, _______
+  KC_RCTRL, KC_EQL, KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR,  RGB_MOD,      RGB_TOG, KC_LBRC, KC_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
+               KC_CTLALTDEL, _______, _______, _______, KC_SH_DEL,     _______,   LLOCK, KC_GRV, _______, _______
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -128,8 +128,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |  XX  |  XX  |  XX  |  XX  | XX   |-------|    |-------| XX   | Home | XX   | End  | XX   | Enter|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            |      |      |      | Layer| /  Del  /       \      \  |      |      |      |      |
- *            |      |      |      | Lock |/       /         \      \ |      |      |      |      |
+ *            |      |      |MACRO | Layer| /  Del  /       \      \  |      |      |      |      |
+ *            |      |      |  Rec | Lock |/       /         \      \ |      |      |      |      |
  *            `---------------------------'-------'           '------''---------------------------'
  */
 [_RAISE] = LAYOUT(
@@ -137,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,  KC_INS, KC_PSCR,  KC_APP, XXXXXXX, XXXXXXX,                        KC_PGUP, KC_PRVWD,  KC_UP, KC_NXTWD,KC_DWORD, KC_DEL,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_CAPS,                        KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  _______,      _______,  XXXXXXX, KC_HOME,XXXXXXX, KC_END,XXXXXXX, KC_ENT,
-                      _______, _______, _______,  LLOCK,  KC_DEL,      _______, _______, _______, _______, _______
+                      _______, _______, DM_REC1,  LLOCK,  KC_DEL,      _______, _______, _______, _______, _______
 )
 };
 
@@ -220,10 +220,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	{26, 2, hsv}, \
 	{36+ 26, 2, hsv}
 #define SET_LAYER_ID(hsv) 	\
-	{0, 1, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS)}, \
+    {0, 1, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS)}, \
     {36+0, 1, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS)}, \
     {1, 6, hsv}, \
     {36+1, 6, hsv}
+#define SET_BRACKETS(hsv)       \
+    {28, 1, hsv}, \
+    {35, 1, hsv}, \
+    {64, 1, hsv}, \
+    {71, 1, hsv}
 
 char layer_state_str[72];
 // Now define the array of layers. Later layers take precedence
@@ -242,13 +247,16 @@ const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
   SET_LAYER_ID(HSV_PURPLE),
   SET_FNROW(HSV_PURPLE),
+  SET_BRACKETS(HSV_PURPLE),
   {7,1,HSV_PURPLE}, // ctl-alt-del on windows key
+  {8,1,HSV_GREEN},  // R-ctrl on ctrl key
   {11,1,HSV_RED}    // alt-F4 on Esc key
 );
 const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
   SET_LAYER_ID(HSV_GREEN),
   SET_ARROWS(HSV_RED),
   {13,1,HSV_GREEN},
+  {17,1,HSV_RED},   // macro_rec
   {20,1,HSV_GREEN},
   {23,1,HSV_GREEN},
   {34,1,HSV_RED},   // capslock
@@ -365,16 +373,16 @@ static void print_status_narrow(void) {
 
     oled_set_cursor(0,3);
 
-    switch (get_highest_layer(default_layer_state)) {
-        case _QWERTY:
+//     switch (get_highest_layer(default_layer_state)) {
+//         case _QWERTY:
             oled_write("QWRTY", false);
-            break;
-        case _GAMING:
-            oled_write("GAMES", false);
-            break;
-        default:
-            oled_write("UNDEF", false);
-    }
+//             break;
+//         case _GAMING:
+//             oled_write("GAMES", false);
+//             break;
+//         default:
+//             oled_write("UNDEF", false);
+//     }
 
     oled_set_cursor(0,5);
 
