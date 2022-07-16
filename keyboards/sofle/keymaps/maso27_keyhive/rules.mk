@@ -5,3 +5,4 @@ SRC += features/layer_lock.c
 CAPS_WORD_ENABLE = yes
 MOUSEKEY_ENABLE = yes
 DYNAMIC_MACRO_ENABLE = yes
+DYNAMIC_MACRO_NO_NESTING = yes
