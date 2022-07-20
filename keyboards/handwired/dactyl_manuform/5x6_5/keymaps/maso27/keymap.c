@@ -295,7 +295,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         rgblight_layers = my_rgb_layers;
         // Set to rainbow mood
         rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_MOOD);
-        rgblight_set_speed_noeeprom(30); // 0 to 255
+        rgblight_set_speed_noeeprom(10); // 0 to 255
     }
 #endif // RGBLIGHT_ENABLE
 

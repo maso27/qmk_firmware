@@ -52,17 +52,13 @@
     #define RGBLIGHT_MAX_LAYERS 5
     
     #undef RGBLED_NUM
-    // #define RGBLED_NUM 16
-    // #define RGBLED_SPLIT {8,8}
     #define RGBLED_NUM 36
     #define RGBLED_SPLIT {18,18}
     
     /* lpd8806 RGB LED */
-    #define LPD8806_DEFAULT_BRIGHTNESS 20
     #define RGB_DI_PIN D3
     #define RGB_CI_PIN D2
     
-    #define RGBLIGHT_LIMIT_VAL 100
     #define RGBLIGHT_HUE_STEP 10
     #define RGBLIGHT_SAT_STEP 17
     #define RGBLIGHT_VAL_STEP 17
