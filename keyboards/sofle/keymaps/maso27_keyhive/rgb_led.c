@@ -70,15 +70,14 @@
     const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
         SET_UNDERGLOW(HSV_WHITE),
         SET_WASD(HSV_WHITE),
-        SET_ARROWS(HSV_WHITE),
-        {35, 1, HSV_WHITE}
+        SET_ARROWS(HSV_WHITE)
     );
     // Light LEDs 11 & 12 in purple when keyboard layer 2 is active
     const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
         SET_UNDERGLOW(HSV_PURPLE),
         SET_FN_KEYS(HSV_PURPLE),
         SET_BRACKETS(HSV_PURPLE),
-        {0, 1, HSV_GREEN}, // Rctrl on Control key
+        {0, 1, HSV_PURPLE}, // Rctrl on Control key
         {5, 1, HSV_RED},    // Alt-F4 Kill
         {11, 1, HSV_PURPLE} // Ctrl-Alt-Del on windows key
     );
@@ -86,7 +85,6 @@
     const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
         SET_UNDERGLOW(HSV_GREEN),
         SET_ARROWS(HSV_WHITE),
-	{23, 1, HSV_RED},   // macro record
         {32, 1, HSV_RED},   // caps lock
         {19, 1, HSV_GREEN}, // menu
         {15, 1, HSV_GREEN}, // printscreen
@@ -98,8 +96,8 @@
         {61, 1, HSV_GREEN}, // end
         {66, 1, HSV_RED},   // delete word
         {68, 1, HSV_RED},   // backspace
-        {70, 1, HSV_RED},     // delete
-        {73, 1, HSV_GREEN}    // enter (no shift)
+        {70,1,HSV_RED},     // delete
+        {73,1,HSV_GREEN}    // enter (no shift)
        
     );
     // Light underglow red when caps lock is active. Hard to ignore!

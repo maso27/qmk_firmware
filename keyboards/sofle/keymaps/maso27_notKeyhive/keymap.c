@@ -105,9 +105,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |   !  |   @  |   #  |   $  |   %  |-------.    ,-------|   ^  |   &  |   *  |   (  |   )  |   |  |
  * |------+------+------+------+------+------|RGBNext|    |RGBOff |------+------+------+------+------+------|
- * | RCTR |  =   |  -   |  +   |   {  |   }  |-------|    |-------|   [  |   ]  |   ;  |   :  |   \  |      |
+ * |      |  XX  |  XX  |  XX  |   {  |   }  |-------|    |-------|   [  |   ]  |      |      |   \  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            |CtlAlt|      |      |      | /Shift- /       \      \  | Layer|  ~   |      |      |
+ *            |CtlAlt|      |      |      | /Shift- /       \      \  | Layer|  _   |      |      |
  *            |  Del |      |      |      |/  Del  /         \      \ | Lock |      |      |      |
  *            `---------------------------'-------'           '------''---------------------------'
  */
@@ -115,29 +115,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_KILL,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                         KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
   _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_F12,
   _______, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                         KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE,
-  KC_RCTRL, KC_EQL, KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR,  RGB_MOD,      RGB_TOG, KC_LBRC, KC_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
-               KC_CTLALTDEL, _______, _______, _______, KC_SH_DEL,     _______,   LLOCK, KC_GRV, _______, _______
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR,  RGB_MOD,      RGB_TOG, KC_LBRC, KC_RBRC, KC_RPRN, _______, KC_BSLS, _______,
+               KC_CTLALTDEL, _______, _______, _______, KC_SH_DEL,     _______,   LLOCK, KC_UNDS, _______, _______
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |  XX  |  XX  | XX   |  XX  |  XX  |                    | XX   |  XX  | XX   | XX   | XX   | BkSpc|
+ * |      |  XX  |  XX  |  XX  |  XX  |  XX  |                    |  XX  |  XX  |  XX  |  XX  |  XX  |  XX  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      | Ins  | Pscr | Menu |  XX  |  XX  |                    | PgUp | PWrd |  Up  | NWrd | DWord| Del  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |  XX  |  XX  |  XX  |  XX  | Caps |-------.    ,-------| PgDn | Left | Down | Right| XX   | XX   |
+ * |      |  XX  |  XX  |  XX  |  XX  | Caps |-------.    ,-------| PgDn | Left | Down | Right| BkSpc|  XX  |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |  XX  |  XX  |  XX  |  XX  | XX   |-------|    |-------| XX   | Home | XX   | End  | XX   | Enter|
+ * | RCTR |  XX  |  XX  |  XX  |  (   |  )   |-------|    |-------|  XX  | Home |  XX  | End  |  XX  | Enter|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            |      |      |MACRO | Layer| /  Del  /       \      \  |      |      |      |      |
+ *            |      |      |MACRO | Layer| /  Del  /       \      \  |      |  ~   |      |      |
  *            |      |      |  Rec | Lock |/       /         \      \ |      |      |      |      |
  *            `---------------------------'-------'           '------''---------------------------'
  */
 [_RAISE] = LAYOUT(
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC,
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   _______,  KC_INS, KC_PSCR,  KC_APP, XXXXXXX, XXXXXXX,                        KC_PGUP, KC_PRVWD,  KC_UP, KC_NXTWD,KC_DWORD, KC_DEL,
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_CAPS,                        KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  _______,      _______,  XXXXXXX, KC_HOME,XXXXXXX, KC_END,XXXXXXX, KC_ENT,
-                      _______, _______, DM_REC1,  LLOCK,  KC_DEL,      _______, _______, _______, _______, _______
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_CAPS,                        KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, XXXXXXX,
+ KC_RCTRL, XXXXXXX, XXXXXXX, XXXXXXX, KC_LPRN, KC_RPRN,  _______,    _______,  XXXXXXX, KC_HOME, XXXXXXX, KC_END,XXXXXXX, KC_ENT,
+                      _______, _______, DM_REC1,  LLOCK,  KC_DEL,      _______, _______, KC_TILD, _______, _______
 )
 };
 
@@ -176,32 +176,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // Light combinations
 #define SET_ALLKEYS(hsv) \
-	{0, 36, hsv}, \
+    {0, 36, hsv}, \
     {36+0, 36, hsv}
 #define SET_INDICATORS(hsv) \
-	{0, 1, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS)}, \
+    {0, 1, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS)}, \
     {36+0, 1, hsv}
 #define SET_UNDERGLOW(hsv) \
-	{1, 6, hsv}, \
+    {1, 6, hsv}, \
     {36+1, 6,hsv}
 #define SET_NUMPAD(hsv)     \
-	{36+13, 3, hsv},\
-	{36+18, 3, hsv},\
-	{36+23, 3, hsv}
+    {36+13, 3, hsv},\
+    {36+18, 3, hsv},\
+    {36+23, 3, hsv}
 #define SET_NUMROW(hsv) \
-	{11, 2, hsv}, \
+    {11, 2, hsv}, \
     {21, 2, hsv}, \
-	{31, 2, hsv}, \
-	{36+ 11, 2, hsv}, \
-	{36+ 21, 2, hsv}, \
-	{36+ 31, 2, hsv}
+    {31, 2, hsv}, \
+    {36+ 11, 2, hsv}, \
+    {36+ 21, 2, hsv}, \
+    {36+ 31, 2, hsv}
 #define SET_FNROW(hsv) \
-	{11, 2, hsv}, \
+    {11, 2, hsv}, \
     {21, 2, hsv}, \
-	{31, 2, hsv}, \
-	{46, 3, hsv}, \
-	{57, 2, hsv}, \
-	{67, 2, hsv}
+    {31, 2, hsv}, \
+    {46, 3, hsv}, \
+    {57, 2, hsv}, \
+    {67, 2, hsv}
 #define SET_ARROWS(hsv) \
     {55,1,hsv}, \
     {59,2,hsv}, \
@@ -211,22 +211,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     {19, 2, hsv}, \
     {24, 1, hsv}
 #define SET_INNER_COL(hsv)	\
-	{32, 4, hsv}, \
-	{36+ 32, 4, hsv}
+    {32, 4, hsv}, \
+    {36+ 32, 4, hsv}
 #define SET_OUTER_COL(hsv) \
-	{8, 4, hsv}, \
-	{36+ 8, 4, hsv}
+    {8, 4, hsv}, \
+    {36+ 8, 4, hsv}
 #define SET_THUMB_CLUSTER(hsv) 	\
-	{26, 2, hsv}, \
-	{36+ 26, 2, hsv}
+    {26, 2, hsv}, \
+    {36+ 26, 2, hsv}
 #define SET_LAYER_ID(hsv) 	\
     {0, 1, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS)}, \
     {36+0, 1, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS)}, \
     {1, 6, hsv}, \
     {36+1, 6, hsv}
-#define SET_BRACKETS(hsv)       \
+#define SET_BRACES(hsv)         \
     {28, 1, hsv}, \
-    {35, 1, hsv}, \
+    {35, 1, hsv}
+#define SET_BRACKETS(hsv)       \
     {64, 1, hsv}, \
     {71, 1, hsv}
 
@@ -248,22 +249,27 @@ const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
   SET_LAYER_ID(HSV_PURPLE),
   SET_FNROW(HSV_PURPLE),
   SET_BRACKETS(HSV_PURPLE),
+  SET_BRACES(HSV_PURPLE),
   {7,1,HSV_PURPLE}, // ctl-alt-del on windows key
-  {8,1,HSV_GREEN},  // R-ctrl on ctrl key
-  {11,1,HSV_RED}    // alt-F4 on Esc key
+//  {8,1,HSV_GREEN},  // R-ctrl on ctrl key
+  {11,1,HSV_RED},    // alt-F4 on Esc key
+  {53,1,HSV_PURPLE}  // _ on - key
 );
 const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
   SET_LAYER_ID(HSV_GREEN),
-  SET_ARROWS(HSV_RED),
+  SET_ARROWS(HSV_WHITE),
+  SET_BRACES(HSV_GREEN), // really parentheses
+  {8,1,HSV_GREEN}, // R-ctrl on ctrl key
   {13,1,HSV_GREEN},
   {17,1,HSV_RED},   // macro_rec
   {20,1,HSV_GREEN},
   {23,1,HSV_GREEN},
   {34,1,HSV_RED},   // capslock
   {44,1,HSV_GREEN}, // enter (no shift)
-  {46,2,HSV_GREEN}, // bkspc-del
-  {49,1,HSV_RED},   // delete word
-  {54,1,HSV_GREEN}, // end
+  {46,1,HSV_RED}, // delete
+  {49,2,HSV_RED},   // delete word and backspace
+  {53,2,HSV_GREEN}, // ~ and end
+//  {54,1,HSV_GREEN}, // end
   {56,1,HSV_GREEN}, // next_word
   {69,2,HSV_GREEN}, // pgup-pgdn
   {66,1,HSV_GREEN}, // prev_word
