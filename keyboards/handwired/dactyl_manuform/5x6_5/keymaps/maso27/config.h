@@ -15,9 +15,6 @@
 
 #pragma once
 
-#undef  MANUFACTURER
-#define MANUFACTURER MadMaso
-
 #define MASTER_LEFT
 //#define EE_HANDS
 // #define SPLIT_USB_DETECT
