@@ -16,11 +16,6 @@
   */
 
 #include QMK_KEYBOARD_H
-#include "features/layer_lock.h"
-
-
-// Base layer is the number of layers CYCLE selects from.
-//#define BASE_LAYERS 2
 
 enum custom_keycodes {
     PLACEHOLDER = SAFE_RANGE,  // can always be here (4 bytes)
@@ -29,8 +24,7 @@ enum custom_keycodes {
     KC_DWORD = LCTL(KC_BSPC),
     KC_CTLALTDEL = LCTL(LALT(KC_DEL)),
     KC_KILL = LALT(KC_F4),
-    KC_SH_DEL = LSFT(KC_DEL),
-    LLOCK = SAFE_RANGE  // layer lock key
+    KC_SH_DEL = LSFT(KC_DEL)
 };
 
 enum custom_layers {
@@ -89,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   , KC_VOLU,       KC_WH_U, KC_Y    , KC_U   , KC_I   , KC_O   , KC_P   , KC_BSPC,
   KC_LSFT, KC_A   , KC_S   , KC_D   , KC_F   , KC_G   , KC_MUTE,   TG(_GAMING), KC_H    , KC_J   , KC_K   , KC_L   , KC_SCLN, KC_QUOT,
   KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   , KC_VOLD,       KC_WH_D, KC_N    , KC_M   , KC_COMM, KC_DOT , KC_SLSH, SC_SENT,
-                  KC_LGUI,KC_LALT,DM_PLY1,MO(_LOWER), KC_BSPC ,         KC_SPC  ,MO(_RAISE), KC_MINS, KC_EQL, KC_BSLS
+                  KC_LGUI,KC_LALT,DM_PLY1,TT(_LOWER), KC_BSPC ,         KC_SPC  ,TT(_RAISE), KC_MINS, KC_EQL, KC_BSLS
 ),
 
 /*
@@ -126,8 +120,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------| RGBDn |< E >|RGBSpd-|------+------+------+------+------+------|
  * |      |  XX  |  XX  |  XX  |   {  |   }  |-------|  R  |-------|   [  |   ]  |      |      |   \  |      |
  * `-----------------------------------------/       /      \      \-----------------------------------------'
- *            |CtlAlt|      |      |      | /Shift- /        \      \  | Layer|  _   |      |      |
- *            |  Del |      |      |      |/  Del  /          \      \ | Lock |      |      |      |
+ *            |CtlAlt|      |      |      | /Shift- /        \      \  |      |  _   |      |      |
+ *            |  Del |      |      |      |/  Del  /          \      \ |      |      |      |      |
  *            `-----------------------------------'            '------''---------------------------'
  */
 [_LOWER] = LAYOUT_via(
@@ -135,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, KC_1   , KC_2   , KC_3   , KC_4   , KC_5   , RGB_VAI,       RGB_SPI, KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_F12 ,
   _______, KC_EXLM, KC_AT  , KC_HASH, KC_DLR , KC_PERC, RGB_MOD,       RGB_TOG, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE,
   _______, KC_EQL , KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR, RGB_VAD,       RGB_SPD, KC_LBRC, KC_RBRC, _______, _______, KC_BSLS, _______,
-             KC_CTLALTDEL, _______, _______, _______, KC_SH_DEL,       _______,  LLOCK, KC_UNDS, _______, _______
+             KC_CTLALTDEL, _______, _______, _______, KC_SH_DEL,      _______, _______, KC_UNDS, _______, _______
 ),
 /* RAISE
  * ,----------------------------------------.                      ,-----------------------------------------.
@@ -147,8 +141,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------| Left  |< E >| Down  |------+------+------+------+------+------|
  * | RCTR |  XX  |  XX  |  XX  |  (   |  )   |-------|  R  |-------|  XX  | Home |  XX  |  End |  XX  | Enter|
  * `-----------------------------------------/      /       \      \-----------------------------------------'
- *            |      |      |MACRO | Layer| / Del  /         \      \  |      |   ~  |      |      |
- *            |      |      |  Rec | Lock |/      /           \      \ |      |      |      |      |
+ *            |      |      |MACRO |      | / Del  /         \      \  |      |   ~  |      |      |
+ *            |      |      |  Rec |      |/      /           \      \ |      |      |      |      |
  *            `----------------------------------'             '------''---------------------------'
  */
 [_RAISE] = LAYOUT_via(
@@ -156,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, KC_INS , KC_PSCR, KC_APP , XXXXXXX , XXXXXXX, KC_RIGHT,     KC_UP,  KC_PGUP,KC_PRVWD, KC_UP  ,KC_NXTWD,KC_DWORD, KC_DEL,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX , KC_CAPS, _______,    _______,  KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, XXXXXXX,
   KC_RCTL, XXXXXXX, XXXXXXX, XXXXXXX, KC_LPRN , KC_RPRN, KC_LEFT,    KC_DOWN,  XXXXXXX, KC_HOME, XXXXXXX,  KC_END, XXXXXXX, KC_ENT,
-                   _______, _______, DM_REC1,  LLOCK,  KC_DEL,        _______, _______, KC_TILD, _______, _______
+                   _______, _______, DM_REC1, _______, KC_DEL,        _______, _______, KC_TILD, _______, _______
 )
 };
 
@@ -166,9 +160,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if ((keycode >= SAFE_RANGE) && !(record->event.pressed)) {
         return false;
     }
-
-    // layer lock code
-    if (!process_layer_lock(keycode, record, LLOCK)) { return false; }
 
     // this uses less memory than returning in each case.
     return keycode < SAFE_RANGE;

@@ -40,6 +40,7 @@
 #endif
 #define ENCODER_DIRECTION_FLIP
 
+#define TAPPING_TOGGLE 2
 
 #define RGBLIGHT_SLEEP
 //

@@ -15,6 +15,8 @@
 
 #pragma once
 
+#define TAPPING_TOGGLE 2
+
 #define MASTER_LEFT
 //#define EE_HANDS
 // #define SPLIT_USB_DETECT

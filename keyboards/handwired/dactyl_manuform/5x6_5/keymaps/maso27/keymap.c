@@ -14,7 +14,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
-#include "features/layer_lock.h"
 
 enum layer_names {
   _DEFAULTS = 0,
@@ -31,8 +30,7 @@ enum custom_keycodes {
     KC_DWORD = LCTL(KC_BSPC),
     KC_CTLALTDEL = LCTL(LALT(KC_DEL)),
     KC_KILL = LALT(KC_F4),
-    KC_SH_DEL = LSFT(KC_DEL),
-    LLOCK = SAFE_RANGE  // layer lock key
+    KC_SH_DEL = LSFT(KC_DEL)
 };
 
 
@@ -60,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    KC_TAB , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   ,                                     KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_BSPC,
    KC_LSFT, KC_A   , KC_S   , KC_D   , KC_F   , KC_G   ,                                     KC_H   , KC_J   , KC_K   , KC_L   , KC_SCLN, KC_QUOT,
    KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   ,                                     KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH,  SC_SENT,
-                     KC_LGUI, KC_LALT,       KC_MUTE,MO(_LOWER),KC_BSPC,   KC_SPC ,MO(_RAISE),TG(_GAMING),    KC_EQL, KC_BSLS,
+                     KC_LGUI, KC_LALT,       KC_MUTE,TT(_LOWER),KC_BSPC,   KC_SPC ,TT(_RAISE),TG(_GAMING),    KC_EQL, KC_BSLS,
                                                       DM_PLY1, KC_HOME,     KC_END , KC_MINS
    ),
   [_GAMING] = LAYOUT_5x6_5(
@@ -101,8 +99,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |      |  XX  |  XX  |  XX  |   {  |   }  |                                  |   [  |   ]  |      |      |   \  |      |
    * '-----------------------------------------/                                  \-----------------------------------------'
    *               |CtlAlt|      |    /       /---------------.    .---------------\       \    |      |      |
-   *               |  Del |      |   / RGBNxt/       /Shift- /      \       \ Layer \RGBOff \   |      |      |
-   *               '-------------'  '-------/       /  Del  /        \       \ Lock  \-------'  '-------------'
+   *               |  Del |      |   / RGBNxt/       /Shift- /      \       \       \RGBOff \   |      |      |
+   *               '-------------'  '-------/       /  Del  /        \       \       \-------'  '-------------'
    *                                       /---------------/          \---------------\
    *                                      /       /       /            \       \   _   \
    *                                     /       /       /              \       \       \
@@ -112,7 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_F12,
    _______, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                                       KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE,
    _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR,                                       KC_LBRC, KC_RBRC, _______, _______, KC_BSLS, _______,
-                KC_CTLALTDEL, _______,          RGB_MOD, _______, KC_SH_DEL, _______,   LLOCK, RGB_TOG,          _______, _______,
+                KC_CTLALTDEL, _______,          RGB_MOD, _______, KC_SH_DEL, _______, _______, RGB_TOG,          _______, _______,
                                                         _______, _______,     _______,   KC_UNDS
    ),
   [_RAISE] = LAYOUT_5x6_5(
@@ -127,8 +125,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * | RCTR |  XX  |  XX  |  XX  |  (   |  )   |                                  |  XX  | Home |  XX  | End  |  XX  | Enter|
    * '-----------------------------------------/                                  \-----------------------------------------'
    *               |      |      |    /       /---------------.    .---------------\       \    |      |      |
-   *               |      |      |   /       / Layer /  Del  /      \       \       \       \   |      |      |
-   *               '-------------'  '-------/  Lock /       /        \       \       \-------'  '-------------'
+   *               |      |      |   /       /       /  Del  /      \       \       \       \   |      |      |
+   *               '-------------'  '-------/       /       /        \       \       \-------'  '-------------'
    *                                       /---------------/          \---------------\
    *                                      / MACRO /       /            \       \   ~   \
    *                                     /   Rec /       /              \       \       \
@@ -138,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    _______,  KC_INS, KC_PSCR,  KC_APP, XXXXXXX, XXXXXXX,                                     KC_PGUP, KC_PRVWD,  KC_UP, KC_NXTWD,KC_DWORD, KC_DEL,
    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_CAPS,                                     KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, XXXXXXX,
    KC_RCTL, XXXXXXX, XXXXXXX, XXXXXXX, KC_LPRN, KC_RPRN,                                     XXXXXXX, KC_HOME, XXXXXXX, KC_END,  XXXXXXX, KC_ENT,
-                     _______, _______,          _______,   LLOCK,  KC_DEL, _______, _______, _______,          XXXXXXX, XXXXXXX,
+                     _______, _______,          _______, _______,  KC_DEL, _______, _______, _______,          XXXXXXX, XXXXXXX,
                                                         DM_REC1, _______,   _______, KC_TILD
    )
 };
@@ -148,15 +146,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // handling this once instead of in each keycode uses less program memory.
     if ((keycode >= SAFE_RANGE) && !(record->event.pressed)) {
         return false;
-    }
-
-    // layer lock code
-    if (!process_layer_lock(keycode, record, LLOCK)) { return false; }
-    
-    switch (keycode) {
-/*         case CYCLE:
-            set_single_persistent_default_layer((1+get_highest_layer(default_layer_state)) % BASE_LAYERS);
-            break; */
     }
 
     // this uses less memory than returning in each case.
