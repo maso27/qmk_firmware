@@ -28,22 +28,22 @@ This firmware will not auto-recognize until [PR #1060](https://github.com/the-vi
 
 Make example for this keyboard (after setting up your build environment):
 
-    make sofle/keyhive:keyhive_via
+    make sofle/keyhive:maso27_keyhive
 
 ## Flashing
 
 Flash using the correct command below (or use QMK Toolbox). These commands can be mixed if, for example, you have an Elite C on the left and a pro micro on the right.
 
-Press reset button on the keyboard when asked.
+Press reset button on the keyboard before running the command.
 
 Disconnect the first half, connect the second one and repeat the process.
 
     # for Pro Micro-based builds
-    make sofle/keyhive:keyhive_via:avrdude-split-left
-    make sofle/keyhive:keyhive_via:avrdude-split-right
+    make sofle/keyhive:maso27_keyhive:avrdude-split-left
+    make sofle/keyhive:maso27_keyhive:avrdude-split-right
 
     # for Elite C or DFU bootloader builds
-    make sofle/keyhive:keyhive_via:dfu-split-left
-    make sofle/keyhive:keyhive_via:dfu-split-right
+    make sofle/keyhive:maso27_keyhive:dfu-split-left
+    make sofle/keyhive:maso27_keyhive:dfu-split-right
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
