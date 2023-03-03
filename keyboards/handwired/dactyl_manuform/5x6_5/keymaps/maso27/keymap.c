@@ -25,6 +25,9 @@ enum layer_names {
 
 enum custom_keycodes {
     PLACEHOLDER = SAFE_RANGE,  // can always be here (4 bytes)
+    KC_LOWER = TT(_LOWER), // MO(_LOWER),
+    KC_RAISE = TT(_RAISE), // MO(_RAISE),
+    KC_ULOCK = TO(_DEFAULTS), // return to main layer
     KC_PRVWD = LCTL(KC_LEFT),
     KC_NXTWD = LCTL(KC_RIGHT),
     KC_DWORD = LCTL(KC_BSPC),
@@ -58,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    KC_TAB , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   ,                                     KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_BSPC,
    KC_LSFT, KC_A   , KC_S   , KC_D   , KC_F   , KC_G   ,                                     KC_H   , KC_J   , KC_K   , KC_L   , KC_SCLN, KC_QUOT,
    KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   ,                                     KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH,  SC_SENT,
-                     KC_LGUI, KC_LALT,       KC_MUTE,TT(_LOWER),KC_BSPC,   KC_SPC ,TT(_RAISE),TG(_GAMING),    KC_EQL, KC_BSLS,
+                     KC_LGUI, KC_LALT,       KC_MUTE, KC_LOWER, KC_BSPC,   KC_SPC ,KC_RAISE,TG(_GAMING),    KC_EQL, KC_BSLS,
                                                       DM_PLY1, KC_HOME,     KC_END , KC_MINS
    ),
   [_GAMING] = LAYOUT_5x6_5(
@@ -99,19 +102,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |      |  XX  |  XX  |  XX  |   {  |   }  |                                  |   [  |   ]  |      |      |   \  |      |
    * '-----------------------------------------/                                  \-----------------------------------------'
    *               |CtlAlt|      |    /       /---------------.    .---------------\       \    |      |      |
-   *               |  Del |      |   / RGBNxt/       /Shift- /      \       \       \RGBOff \   |      |      |
-   *               '-------------'  '-------/       /  Del  /        \       \       \-------'  '-------------'
+   *               |  Del |      |   / RGBNxt/Layers /Shift- /      \       \ Layers\RGBOff \   |      |      |
+   *               '-------------'  '-------/   OFF /  Del  /        \       \  OFF  \-------'  '-------------'
    *                                       /---------------/          \---------------\
-   *                                      /       /       /            \       \   _   \
-   *                                     /       /       /              \       \       \
+   *                                      / MACRO /       /            \       \   _   \
+   *                                     /  Stop /       /              \       \       \
    *                                    '---------------'                '---------------'
    */
    KC_KILL, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                                       KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 ,
    _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_F12,
    _______, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                                       KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE,
    _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR,                                       KC_LBRC, KC_RBRC, _______, _______, KC_BSLS, _______,
-                KC_CTLALTDEL, _______,          RGB_MOD, _______, KC_SH_DEL, _______, _______, RGB_TOG,          _______, _______,
-                                                        _______, _______,     _______,   KC_UNDS
+                KC_CTLALTDEL, _______,        RGB_MOD, KC_ULOCK, KC_SH_DEL, _______,KC_ULOCK, RGB_TOG,           _______, _______,
+                                                        DM_RSTP, _______,     _______,   KC_UNDS
    ),
   [_RAISE] = LAYOUT_5x6_5(
   /* RAISE
@@ -125,8 +128,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * | RCTR |  XX  |  XX  |  XX  |  (   |  )   |                                  |  XX  | Home |  XX  | End  |  XX  | Enter|
    * '-----------------------------------------/                                  \-----------------------------------------'
    *               |      |      |    /       /---------------.    .---------------\       \    |      |      |
-   *               |      |      |   /       /       /  Del  /      \       \       \       \   |      |      |
-   *               '-------------'  '-------/       /       /        \       \       \-------'  '-------------'
+   *               |      |      |   /       /Layers /  Del  /      \       \ Layers\       \   |      |      |
+   *               '-------------'  '-------/   OFF /       /        \       \  OFF  \-------'  '-------------'
    *                                       /---------------/          \---------------\
    *                                      / MACRO /       /            \       \   ~   \
    *                                     /   Rec /       /              \       \       \
@@ -136,7 +139,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    _______,  KC_INS, KC_PSCR,  KC_APP, XXXXXXX, XXXXXXX,                                     KC_PGUP, KC_PRVWD,  KC_UP, KC_NXTWD,KC_DWORD, KC_DEL,
    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_CAPS,                                     KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, XXXXXXX,
    KC_RCTL, XXXXXXX, XXXXXXX, XXXXXXX, KC_LPRN, KC_RPRN,                                     XXXXXXX, KC_HOME, XXXXXXX, KC_END,  XXXXXXX, KC_ENT,
-                     _______, _______,          _______, _______,  KC_DEL, _______, _______, _______,          XXXXXXX, XXXXXXX,
+                     _______, _______,          _______, KC_ULOCK, KC_DEL, _______, KC_ULOCK, _______,          XXXXXXX, XXXXXXX,
                                                         DM_REC1, _______,   _______, KC_TILD
    )
 };

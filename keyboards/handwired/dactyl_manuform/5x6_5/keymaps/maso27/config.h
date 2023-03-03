@@ -16,6 +16,7 @@
 #pragma once
 
 #define TAPPING_TOGGLE 2
+#define HOLD_ON_OTHER_KEY_PRESS // for layer toggle -- keypress faster
 
 #define MASTER_LEFT
 //#define EE_HANDS

@@ -36,8 +36,9 @@ enum sofle_layers {
 
 enum custom_keycodes {
     PLACEHOLDER = SAFE_RANGE,
-    KC_LOWER = TT(_LOWER), // MO(_LOWER), // LT(_LOWER,KC_LPRN), // lower layer when held, parentheses when tapped
-    KC_RAISE = TT(_RAISE), // MO(_RAISE), // LT(_RAISE,KC_RPRN),
+    KC_LOWER = TT(_LOWER), // MO(_LOWER), 
+    KC_RAISE = TT(_RAISE), // MO(_RAISE),
+    KC_ULOCK = TO(_DEFAULTS), // return to main layer 
     KC_PRVWD = LCTL(KC_LEFT),
     KC_NXTWD = LCTL(KC_RIGHT),
     KC_DWORD = LCTL(KC_BSPC),
@@ -105,8 +106,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|RGBNext|    |RGBOff |------+------+------+------+------+------|
  * |      |  XX  |  XX  |  XX  |   {  |   }  |-------|    |-------|   [  |   ]  |      |      |   \  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            |CtlAlt|      |      |      | /Shift- /       \      \  |      |  _   |      |      |
- *            |  Del |      |      |      |/  Del  /         \      \ |      |      |      |      |
+ *            |CtlAlt|      |MACRO |Layers| /Shift- /       \      \  |Layers|  _   |      |      |
+ *            |  Del |      | Stop |  OFF |/  Del  /         \      \ |  OFF |      |      |      |
  *            `---------------------------'-------'           '------''---------------------------'
  */
 [_LOWER] = LAYOUT(
@@ -114,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_F12,
   _______, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                         KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR,  RGB_MOD,      RGB_TOG, KC_LBRC, KC_RBRC, _______, _______, KC_BSLS, _______,
-               KC_CTLALTDEL, _______, _______, _______, KC_SH_DEL,     _______, _______, KC_UNDS, _______, _______
+               KC_CTLALTDEL, _______, DM_RSTP,KC_ULOCK, KC_SH_DEL,     _______,KC_ULOCK, KC_UNDS, _______, _______
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -126,8 +127,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * | RCTR |  XX  |  XX  |  XX  |  (   |  )   |-------|    |-------|  XX  | Home |  XX  | End  |  XX  | Enter|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            |      |      |MACRO |      | /  Del  /       \      \  |      |  ~   |      |      |
- *            |      |      |  Rec |      |/       /         \      \ |      |      |      |      |
+ *            |      |      |MACRO |Layers| /  Del  /       \      \  |Layers|  ~   |      |      |
+ *            |      |      |  Rec |  OFF |/       /         \      \ |  OFF |      |      |      |
  *            `---------------------------'-------'           '------''---------------------------'
  */
 [_RAISE] = LAYOUT(
@@ -135,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,  KC_INS, KC_PSCR,  KC_APP, XXXXXXX, XXXXXXX,                        KC_PGUP, KC_PRVWD,  KC_UP, KC_NXTWD,KC_DWORD, KC_DEL,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_CAPS,                        KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, XXXXXXX,
   KC_RCTL, XXXXXXX, XXXXXXX, XXXXXXX, KC_LPRN, KC_RPRN,  _______,    _______,  XXXXXXX, KC_HOME, XXXXXXX, KC_END,XXXXXXX, KC_ENT,
-                      _______, _______, DM_REC1, _______, KC_DEL,      _______, _______, KC_TILD, _______, _______
+                    _______, _______, DM_REC1,KC_ULOCK, KC_DEL,       _______,KC_ULOCK, KC_TILD, _______, _______
 )
 };
 

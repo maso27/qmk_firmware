@@ -33,14 +33,16 @@
 #define CUSTOM_LAYER_READ //if you remove this it causes issues - needs better guarding
 
 
-#define TAPPING_FORCE_HOLD
+//#define TAPPING_FORCE_HOLD
+#define TAPPING_TOGGLE 2
+#define HOLD_ON_OTHER_KEY_PRESS // for layer toggle -- keypress faster
+
 #ifdef TAPPING_TERM
     #undef TAPPING_TERM
     #define TAPPING_TERM 200
 #endif
-#define ENCODER_DIRECTION_FLIP
 
-#define TAPPING_TOGGLE 2
+#define ENCODER_DIRECTION_FLIP
 
 #define RGBLIGHT_SLEEP
 //

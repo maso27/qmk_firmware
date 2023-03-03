@@ -26,6 +26,7 @@ for more options.
 #define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
 
 #define TAPPING_TOGGLE 2
+#define HOLD_ON_OTHER_KEY_PRESS // for layer toggle -- keypress faster
 
 // More lighting options in quantum/rgblight/rgblight.h
 #ifdef RGBLIGHT_ENABLE

@@ -17,22 +17,25 @@
 
 #include QMK_KEYBOARD_H
 
-enum custom_keycodes {
-    PLACEHOLDER = SAFE_RANGE,  // can always be here (4 bytes)
-    KC_PRVWD = LCTL(KC_LEFT),
-    KC_NXTWD = LCTL(KC_RIGHT),
-    KC_DWORD = LCTL(KC_BSPC),
-    KC_CTLALTDEL = LCTL(LALT(KC_DEL)),
-    KC_KILL = LALT(KC_F4),
-    KC_SH_DEL = LSFT(KC_DEL)
-};
-
 enum custom_layers {
     _DEFAULTS = 0,
     _QWERTY = 0,
     _GAMING = 1,
     _LOWER = 2,
     _RAISE = 3
+};
+
+enum custom_keycodes {
+    PLACEHOLDER = SAFE_RANGE,  // can always be here (4 bytes)
+    KC_LOWER = TT(_LOWER), // MO(_LOWER),
+    KC_RAISE = TT(_RAISE), // MO(_RAISE),
+    KC_ULOCK = TO(_DEFAULTS), // return to main layer
+    KC_PRVWD = LCTL(KC_LEFT),
+    KC_NXTWD = LCTL(KC_RIGHT),
+    KC_DWORD = LCTL(KC_BSPC),
+    KC_CTLALTDEL = LCTL(LALT(KC_DEL)),
+    KC_KILL = LALT(KC_F4),
+    KC_SH_DEL = LSFT(KC_DEL)
 };
 
 #include "oled.c"
@@ -83,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   , KC_VOLU,       KC_WH_U, KC_Y    , KC_U   , KC_I   , KC_O   , KC_P   , KC_BSPC,
   KC_LSFT, KC_A   , KC_S   , KC_D   , KC_F   , KC_G   , KC_MUTE,   TG(_GAMING), KC_H    , KC_J   , KC_K   , KC_L   , KC_SCLN, KC_QUOT,
   KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   , KC_VOLD,       KC_WH_D, KC_N    , KC_M   , KC_COMM, KC_DOT , KC_SLSH, SC_SENT,
-                  KC_LGUI,KC_LALT,DM_PLY1,TT(_LOWER), KC_BSPC ,         KC_SPC  ,TT(_RAISE), KC_MINS, KC_EQL, KC_BSLS
+                  KC_LGUI,KC_LALT,DM_PLY1,KC_LOWER, KC_BSPC ,         KC_SPC  ,KC_RAISE, KC_MINS, KC_EQL, KC_BSLS
 ),
 
 /*
@@ -120,16 +123,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------| RGBDn |< E >|RGBSpd-|------+------+------+------+------+------|
  * |      |  XX  |  XX  |  XX  |   {  |   }  |-------|  R  |-------|   [  |   ]  |      |      |   \  |      |
  * `-----------------------------------------/       /      \      \-----------------------------------------'
- *            |CtlAlt|      |      |      | /Shift- /        \      \  |      |  _   |      |      |
- *            |  Del |      |      |      |/  Del  /          \      \ |      |      |      |      |
+ *            |CtlAlt|      |MACRO |Layers| /Shift- /        \      \  |Layers|  _   |      |      |
+ *            |  Del |      | Stop |  OFF |/  Del  /          \      \ |  OFF |      |      |      |
  *            `-----------------------------------'            '------''---------------------------'
  */
 [_LOWER] = LAYOUT_via(
   KC_KILL, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                         KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 ,
   _______, KC_1   , KC_2   , KC_3   , KC_4   , KC_5   , RGB_VAI,       RGB_SPI, KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_F12 ,
   _______, KC_EXLM, KC_AT  , KC_HASH, KC_DLR , KC_PERC, RGB_MOD,       RGB_TOG, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE,
-  _______, KC_EQL , KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR, RGB_VAD,       RGB_SPD, KC_LBRC, KC_RBRC, _______, _______, KC_BSLS, _______,
-             KC_CTLALTDEL, _______, _______, _______, KC_SH_DEL,      _______, _______, KC_UNDS, _______, _______
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR, RGB_VAD,       RGB_SPD, KC_LBRC, KC_RBRC, _______, _______, KC_BSLS, _______,
+            KC_CTLALTDEL, _______, DM_RSTP,KC_ULOCK, KC_SH_DEL,         _______,KC_ULOCK, KC_UNDS, _______, _______
 ),
 /* RAISE
  * ,----------------------------------------.                      ,-----------------------------------------.
@@ -141,16 +144,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------| Left  |< E >| Down  |------+------+------+------+------+------|
  * | RCTR |  XX  |  XX  |  XX  |  (   |  )   |-------|  R  |-------|  XX  | Home |  XX  |  End |  XX  | Enter|
  * `-----------------------------------------/      /       \      \-----------------------------------------'
- *            |      |      |MACRO |      | / Del  /         \      \  |      |   ~  |      |      |
- *            |      |      |  Rec |      |/      /           \      \ |      |      |      |      |
+ *            |      |      |MACRO |Layers| / Del  /         \      \  |Layers|   ~  |      |      |
+ *            |      |      |  Rec |  OFF |/      /           \      \ |  OFF |      |      |      |
  *            `----------------------------------'             '------''---------------------------'
  */
 [_RAISE] = LAYOUT_via(
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  _______, KC_INS , KC_PSCR, KC_APP , XXXXXXX , XXXXXXX, KC_RIGHT,     KC_UP,  KC_PGUP,KC_PRVWD, KC_UP  ,KC_NXTWD,KC_DWORD, KC_DEL,
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX , KC_CAPS, _______,    _______,  KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, XXXXXXX,
-  KC_RCTL, XXXXXXX, XXXXXXX, XXXXXXX, KC_LPRN , KC_RPRN, KC_LEFT,    KC_DOWN,  XXXXXXX, KC_HOME, XXXXXXX,  KC_END, XXXXXXX, KC_ENT,
-                   _______, _______, DM_REC1, _______, KC_DEL,        _______, _______, KC_TILD, _______, _______
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  _______, KC_INS , KC_PSCR, KC_APP , XXXXXXX, XXXXXXX, KC_RIGHT,     KC_UP,  KC_PGUP,KC_PRVWD, KC_UP  ,KC_NXTWD,KC_DWORD, KC_DEL,
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_CAPS, _______,    _______,  KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, XXXXXXX,
+  KC_RCTL, XXXXXXX, XXXXXXX, XXXXXXX, KC_LPRN, KC_RPRN, KC_LEFT,    KC_DOWN,  XXXXXXX, KC_HOME, XXXXXXX,  KC_END, XXXXXXX, KC_ENT,
+                   _______, _______, DM_REC1, KC_ULOCK, KC_DEL,       _______,KC_ULOCK, KC_TILD, _______, _______
 )
 };
 
