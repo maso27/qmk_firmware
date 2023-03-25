@@ -33,15 +33,18 @@
 
 // More lighting options in quantum/rgblight/rgblight.h
 #ifdef RGBLIGHT_ENABLE
-    #define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_RAINBOW_MOOD+2
+    #define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_BREATHING // RGBLIGHT_MODE_RAINBOW_MOOD+2
+     #define RGBLIGHT_BREATHE_MAX 65 // default is 255
+    #define RGBLIGHT_LIMIT_VAL 127
+    #define RGBLIGHT_DEFAULT_HUE 127 // 127 is CYAN
 
     // Disabling some of these is a good way to save flash space.
     // #define RGBLIGHT_EFFECT_ALTERNATING     // 108
     // #define RGBLIGHT_EFFECT_RGB_TEST        // 158
-    #define RGBLIGHT_EFFECT_RAINBOW_MOOD    // 160
+     #define RGBLIGHT_EFFECT_RAINBOW_MOOD      // 160
     // #define RGBLIGHT_EFFECT_STATIC_GRADIENT // 168
     // #define RGBLIGHT_EFFECT_RAINBOW_SWIRL   // 192
-    // #define RGBLIGHT_EFFECT_BREATHING       // 348
+    #define RGBLIGHT_EFFECT_BREATHING          // 348
     // #define RGBLIGHT_EFFECT_KNIGHT          // 336
     // #define RGBLIGHT_EFFECT_SNAKE           // 406
     // #define RGBLIGHT_EFFECT_CHRISTMAS       // 508

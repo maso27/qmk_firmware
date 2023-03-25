@@ -53,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *               |      |      |   /       / LOWER / Bspc  /      \ Space \ RAISE \       \   |      |      |
    *               '-------------'  '-------/       /       /        \       \       \-------'  '-------------'
    *                                       /---------------/          \---------------\
-   *                                      / MACRO / Home  /            \  End  \   -   \
+   *                                      / MACRO /  {/[  /            \  ]\}  \   -   \
    *                                     /   Play/       /              \       \       \
    *                                    '---------------'                '---------------'
    */
@@ -61,8 +61,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    KC_TAB , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   ,                                     KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_BSPC,
    KC_LSFT, KC_A   , KC_S   , KC_D   , KC_F   , KC_G   ,                                     KC_H   , KC_J   , KC_K   , KC_L   , KC_SCLN, KC_QUOT,
    KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   ,                                     KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH,  SC_SENT,
-                     KC_LGUI, KC_LALT,       KC_MUTE, KC_LOWER, KC_BSPC,   KC_SPC ,KC_RAISE,TG(_GAMING),    KC_EQL, KC_BSLS,
-                                                      DM_PLY1, KC_HOME,     KC_END , KC_MINS
+                     KC_LGUI, KC_LALT,       KC_MUTE, KC_LOWER, KC_BSPC,   KC_SPC, KC_RAISE,TG(_GAMING),    KC_EQL, KC_BSLS,
+                                                      DM_PLY1, KC_LBRC,     KC_RBRC, KC_MINS
    ),
   [_GAMING] = LAYOUT_5x6_5(
   /* GAMING
@@ -156,7 +156,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 };
 
 #ifdef RGBLIGHT_ENABLE
-    // This is just copy-pasted.  Not complete.
+    // This is copy-pasted. May need more attention
     #define INDICATOR_BRIGHTNESS 30
     #define KEY_BRIGHTNESS 40
 
@@ -167,27 +167,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #define SET_ALLKEYS(hsv) \
         {0, 18, hsv}, \
         {18+0, 18, hsv}
-/*    #define SET_UNDERGLOW(hsv) \
-        {1, 6, hsv}, \
-        {36+1, 6,hsv}
-    #define SET_NUMPAD(hsv)     \
-        {36+13, 3, hsv},\
-        {36+18, 3, hsv},\
-        {36+23, 3, hsv}
-*/
     #define SET_NUMROW(hsv) \
         {0, 1, hsv}, \
         {13, 2, hsv}, \
         {18+ 0, 1, hsv}, \
         {18+ 13, 2, hsv}
-/*    #define SET_FNROW(hsv) \
-        {11, 2, hsv}, \
-        {21, 2, hsv}, \
-        {31, 2, hsv}, \
-        {46, 3, hsv}, \
-        {57, 2, hsv}, \
-        {67, 2, hsv}
-*/
     #define SET_ARROWS(hsv) \
         {20,1,hsv}, \
         {29,2,hsv}
@@ -196,14 +180,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         {16, 1, hsv}
     #define SET_BKSPC(hsv) \
         {32, 2, hsv}
-/*
-    #define SET_INNER_COL(hsv)	\
-        {32, 4, hsv}, \
-        {36+ 32, 4, hsv}
-    #define SET_OUTER_COL(hsv) \
-        {8, 4, hsv}, \
-        {36+ 8, 4, hsv}
-*/
     #define SET_THUMB_CLUSTER(hsv) 	\
         {5, 3, hsv}, \
         {18+5, 3, hsv}
@@ -251,8 +227,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     );
     const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
       // SET_ALLKEYS(HSV_GREEN)
-      SET_ARROWS(HSV_WHITE),
-      SET_BKSPC(HSV_RED),
+      // SET_ARROWS(HSV_WHITE),
+      // SET_BKSPC(HSV_RED),
       SET_THUMB_CLUSTER(HSV_GREEN)
     );
     const rgblight_segment_t PROGMEM my_capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
@@ -286,7 +262,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // Enable the LED layers
         rgblight_layers = my_rgb_layers;
         // Set to rainbow mood
-        rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_MOOD);
+        rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING); // (RGBLIGHT_MODE_RAINBOW_MOOD);
+	rgblight_sethsv_noeeprom(HSV_CYAN);
         rgblight_set_speed_noeeprom(10); // 0 to 255
     }
 #endif // RGBLIGHT_ENABLE
