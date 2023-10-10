@@ -31,6 +31,7 @@ safe_commands = [
 ]
 
 subcommands = [
+    'qmk.cli.ci.validate_aliases',
     'qmk.cli.bux',
     'qmk.cli.c2json',
     'qmk.cli.cd',
@@ -39,6 +40,7 @@ subcommands = [
     'qmk.cli.compile',
     'qmk.cli.docs',
     'qmk.cli.doctor',
+    'qmk.cli.find',
     'qmk.cli.flash',
     'qmk.cli.format.c',
     'qmk.cli.format.json',
@@ -56,6 +58,7 @@ subcommands = [
     'qmk.cli.generate.keyboard_h',
     'qmk.cli.generate.keycodes',
     'qmk.cli.generate.keycodes_tests',
+    'qmk.cli.generate.make_dependencies',
     'qmk.cli.generate.rgb_breathe_table',
     'qmk.cli.generate.rules_mk',
     'qmk.cli.generate.version_h',
