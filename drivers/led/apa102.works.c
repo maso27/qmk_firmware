@@ -16,19 +16,19 @@
  */
 
 #include "apa102.h"
-#include "gpio.h"
+#include "quantum.h"
 
 #ifndef APA102_NOPS
 #    if defined(__AVR__)
-#        define APA102_NOPS 0 // AVR at 16 MHz already spends 62.5 ns per clock, so no extra delay is needed
+#        define APA102_NOPS 0  // AVR at 16 MHz already spends 62.5 ns per clock, so no extra delay is needed
 #    elif defined(PROTOCOL_CHIBIOS)
+
 #        include "hal.h"
-#        include "chibios_config.h"
 #        if defined(STM32F0XX) || defined(STM32F1XX) || defined(STM32F3XX) || defined(STM32F4XX) || defined(STM32L0XX) || defined(GD32VF103)
-#            define APA102_NOPS (100 / (1000000000L / (CPU_CLOCK / 4))) // This calculates how many loops of 4 nops to run to delay 100 ns
+#            define APA102_NOPS (100 / (1000000000L / (CPU_CLOCK / 4)))  // This calculates how many loops of 4 nops to run to delay 100 ns
 #        else
-#            error APA102_NOPS configuration required
-#            define APA102_NOPS 0 // this just pleases the compile so the above error is easier to spot
+#            error("APA102_NOPS configuration required")
+#            define APA102_NOPS 0  // this just pleases the compile so the above error is easier to spot
 #        endif
 #    endif
 #endif
@@ -43,19 +43,21 @@
         }                                       \
     } while (0)
 
-#define APA102_SEND_BIT(byte, bit)                  \
-    do {                                            \
-        writePin(APA102_DI_PIN, (byte >> bit) & 1); \
-        io_wait;                                    \
-        writePinHigh(APA102_CI_PIN);                \
-        io_wait;                                    \
-        writePinLow(APA102_CI_PIN);                 \
-        io_wait;                                    \
+#define APA102_SEND_BIT(byte, bit)               \
+    do {                                         \
+        writePin(RGB_DI_PIN, (byte >> bit) & 1); \
+        io_wait;                                 \
+        writePinHigh(RGB_CI_PIN);                \
+        io_wait;                                 \
+        writePinLow(RGB_CI_PIN);                 \
+        io_wait;                                 \
     } while (0)
 
 uint8_t apa102_led_brightness = APA102_DEFAULT_BRIGHTNESS;
 
-void static apa102_start_frame(void);
+void static apa102_init(void);
+
+// void static apa102_start_frame(void);
 void static apa102_end_frame(uint16_t num_leds);
 
 void static apa102_send_frame(uint8_t red, uint8_t green, uint8_t blue, uint8_t brightness);
@@ -64,7 +66,8 @@ void static apa102_send_byte(uint8_t byte);
 void apa102_setleds(LED_TYPE *start_led, uint16_t num_leds) {
     LED_TYPE *end = start_led + num_leds;
 
-    apa102_start_frame();
+    // apa102_start_frame();
+    apa102_init();
     for (LED_TYPE *led = start_led; led < end; led++) {
         apa102_send_frame(led->r, led->g, led->b, apa102_led_brightness);
     }
@@ -72,16 +75,14 @@ void apa102_setleds(LED_TYPE *start_led, uint16_t num_leds) {
 }
 
 // Overwrite the default rgblight_call_driver to use apa102 driver
-void rgblight_call_driver(LED_TYPE *start_led, uint8_t num_leds) {
-    apa102_setleds(start_led, num_leds);
-}
+void rgblight_call_driver(LED_TYPE *start_led, uint8_t num_leds) { apa102_setleds(start_led, num_leds); }
 
 void static apa102_init(void) {
-    setPinOutput(APA102_DI_PIN);
-    setPinOutput(APA102_CI_PIN);
+    setPinOutput(RGB_DI_PIN);
+    setPinOutput(RGB_CI_PIN);
 
-    writePinLow(APA102_DI_PIN);
-    writePinLow(APA102_CI_PIN);
+    writePinLow(RGB_DI_PIN);
+    writePinLow(RGB_CI_PIN);
 }
 
 void apa102_set_brightness(uint8_t brightness) {
@@ -95,7 +96,10 @@ void apa102_set_brightness(uint8_t brightness) {
 }
 
 void static apa102_send_frame(uint8_t red, uint8_t green, uint8_t blue, uint8_t brightness) {
-    apa102_send_byte(0b11100000 | brightness);
+/* MSS    apa102_send_byte(0b11100000 | brightness);
+    apa102_send_byte(blue);
+    apa102_send_byte(green);
+    apa102_send_byte(red); */
     uint8_t red_send, green_send, blue_send;
     red_send = (red >> 1) | 0x80;
     green_send = (green >> 1) | 0x80;
@@ -104,17 +108,14 @@ void static apa102_send_frame(uint8_t red, uint8_t green, uint8_t blue, uint8_t 
     apa102_send_byte(blue_send);
     apa102_send_byte(red_send);
     apa102_send_byte(green_send);
-    // apa102_send_byte(blue);
-    // apa102_send_byte(green);
-    // apa102_send_byte(red);
 }
 
-void static apa102_start_frame(void) {
+/* void static apa102_start_frame(void) {
     apa102_init();
     for (uint16_t i = 0; i < 4; i++) {
         apa102_send_byte(0);
     }
-}
+} */
 
 void static apa102_end_frame(uint16_t num_leds) {
     // This function has been taken from: https://github.com/pololu/apa102-arduino/blob/master/APA102.h
@@ -141,11 +142,13 @@ void static apa102_end_frame(uint16_t num_leds) {
     // datasheet, which says to send 0xFF four times, because it does not work
     // when you have 66 LEDs or more, and also it results in unwanted white
     // pixels if you try to update fewer LEDs than are on your LED strip.
-    uint16_t iterations = (num_leds + 14) / 16;
+/*     uint16_t iterations = (num_leds + 14) / 16;
     for (uint16_t i = 0; i < iterations; i++) {
         apa102_send_byte(0);
+    } */
+    for (uint16_t i = 0; i < 3; i++) {
+        apa102_send_byte(0);
     }
-
     apa102_init();
 }
 
