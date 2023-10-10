@@ -35,17 +35,16 @@
 
 //#define TAPPING_FORCE_HOLD
 #define TAPPING_TOGGLE 2
-#define HOLD_ON_OTHER_KEY_PRESS // for layer toggle -- keypress faster
+// #define HOLD_ON_OTHER_KEY_PRESS // for layer toggle -- keypress faster
 
 #ifdef TAPPING_TERM
     #undef TAPPING_TERM
-    #define TAPPING_TERM 200
 #endif
+#define TAPPING_TERM 200
 
 #define ENCODER_DIRECTION_FLIP
 
 #define RGBLIGHT_SLEEP
-//
 #define RGBLIGHT_LAYERS
 
 /* ws2812 RGB LED */
@@ -53,7 +52,6 @@
 
 
 #ifdef RGB_MATRIX_ENABLE
-#define RGBLED_NUM 36    // Number of LEDs
 #define RGBLED_NUM 36    // Number of LEDs
 #define DRIVER_LED_TOTAL RGBLED_NUM
 #endif
@@ -73,11 +71,11 @@
 	//#define RGBLIGHT_EFFECT_ALTERNATING
 	//#define RGBLIGHT_EFFECT_TWINKLE
 
+    #define WS2812_DI_PIN D3
     #define RGBLED_NUM 72
 	//#define RGBLED_SPLIT
 	#define RGBLED_SPLIT { 36, 36 } // haven't figured out how to use this yet
 
-	//#define RGBLED_NUM 30
     #define RGBLIGHT_LIMIT_VAL 120 // 60
     #define RGBLIGHT_HUE_STEP 10
     #define RGBLIGHT_SAT_STEP 17
