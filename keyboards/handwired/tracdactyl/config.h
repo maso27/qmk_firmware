@@ -1,0 +1,8 @@
+#pragma once
+
+// #define GRAVE_ESC_SHIFT_OVERRIDE
+// #undef SERIAL_USART_FULL_DUPLEX
+// #undef SERIAL_USART_RX_PIN
+// #define SELECT_SOFT_SERIAL_SPEED 5
+#define SPLIT_USB_DETECT
+#define SERIAL_PIO_USE_PIO1
