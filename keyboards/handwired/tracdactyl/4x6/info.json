@@ -19,6 +19,18 @@
         "soft_serial_pin": "GP1",
         "bootmagic": { "matrix": [0, 0] }
     },
+    "transport": {
+        "layer_state": true,
+        "matrix_state": true
+    },
+    "tapping": {
+        "toggle": 2,
+        "hold_on_other_keypress": true
+    },
+    "caps_word": {
+        "enabled": true,
+        "double_tap_shift_turns_on": true
+    },
     "encoder": {
         "rotary": [
             {"pin_a": "GP2", "pin_b": "GP3"}
