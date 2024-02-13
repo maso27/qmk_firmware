@@ -38,6 +38,7 @@ enum custom_keycodes {
     KC_CTLALTDEL = LCTL(LALT(KC_DEL)),
     KC_KILL  = LALT(KC_F4),
     KC_SH_DEL = LSFT(KC_DEL),
+    PT_MOUSE = TT(LAYER_POINTER),
     PT_Z     = LT(LAYER_POINTER, KC_Z),
     PT_SLSH  = LT(LAYER_POINTER, KC_SLSH)
 };
@@ -58,10 +59,12 @@ static uint16_t auto_pointer_layer_timer = 0;
 #endif     // TRACDACTYL_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
 #ifndef POINTING_DEVICE_ENABLE
-#    define DRGSCRL KC_NO
-#    define DPI_MOD KC_NO
-#    define S_D_MOD KC_NO
-#    define SNIPING KC_NO
+#    define DRGSCRL  KC_NO
+#    define DPI_MOD  KC_NO
+#    define DPI_RMOD KC_NO
+#    define S_D_MOD  KC_NO
+#    define S_D_RMOD KC_NO
+#    define SNIPING  KC_NO
 #endif // !POINTING_DEVICE_ENABLE
 
 // clang-format off
@@ -77,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_LCTL,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,                           KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH, SC_SENT,
   // ╰──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────╯
                          KC_LGUI, KC_LALT, KC_MUTE, KC_LOWER, KC_BSPC,   KC_SPC, KC_RAISE,  KC_MINS,    KC_EQL, KC_BSLS,
-                                                     DM_PLY1, KC_LBRC,                                        KC_MS_BTN1
+                                                    DM_PLY1, PT_MOUSE,                                        KC_MS_BTN1
   //                                      ╰───────────────────────────╯ ╰───────────────────────────╯
   ),
 
@@ -115,14 +118,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭──────────────────────────────────────────────────────╮                     ╭──────────────────────────────────────────────────────╮
        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
-       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DPI_MOD, S_D_MOD,                        S_D_MOD, DPI_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, DPI_RMOD, DPI_MOD,                      S_D_RMOD, S_D_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
-       XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                        XXXXXXX, KC_BTN1, KC_BTN3, KC_BTN2, KC_RGUI, XXXXXXX,
+       RGB_TOG, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                        XXXXXXX, KC_BTN1, KC_BTN3, KC_BTN2, KC_RGUI, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
-       XXXXXXX, _______, DRGSCRL, SNIPING, EE_CLR,  QK_BOOT,                        QK_BOOT, EE_CLR,  SNIPING, DRGSCRL, _______, XXXXXXX,
+      RGB_RMOD, _______, DRGSCRL, SNIPING, EE_CLR,  QK_BOOT,                        QK_BOOT, EE_CLR,  SNIPING, DRGSCRL, _______, XXXXXXX,
   // ╰──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────╯
-                         _______, _______, _______, KC_BTN1, KC_BTN3,     KC_BTN1, KC_BTN2, KC_BTN3, XXXXXXX, XXXXXXX,
-                                                    XXXXXXX, KC_BTN2,                                        KC_BTN3
+                         _______, _______, _______, KC_BTN1, KC_BTN2,     KC_BTN1, KC_BTN2, KC_ULOCK, XXXXXXX, XXXXXXX,
+                                                    KC_BTN3, KC_ULOCK,                                        KC_BTN3
   //                                      ╰───────────────────────────╯ ╰───────────────────────────╯
   ),
 };
@@ -169,61 +172,10 @@ void rgb_matrix_update_pwm_buffers(void);
 #endif
 
 #ifdef ENCODER_ENABLE
-const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [0] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_WH_D, KC_WH_U)  },
-    [1] =   { ENCODER_CCW_CW(RGB_VAD, RGB_VAI),  ENCODER_CCW_CW(RGB_SPD, RGB_SPI)  },
-    [2] =   { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT), ENCODER_CCW_CW(KC_DOWN, KC_UP)  },
-    [3] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_WH_D, KC_WH_U)  }
-};
+    const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
+        [0] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_WH_D, KC_WH_U)  },
+        [1] =   { ENCODER_CCW_CW(RGB_VAD, RGB_VAI),  ENCODER_CCW_CW(RGB_SPD, RGB_SPI)  },
+        [2] =   { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT), ENCODER_CCW_CW(KC_DOWN, KC_UP)  },
+        [3] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_WH_D, KC_WH_U)  }
+    };
 #endif
-
-// #ifdef ENCODER_ENABLE
-// bool encoder_update_user(uint8_t index, bool clockwise) {
-//     if (index == 0) {
-//         if (clockwise) {
-//             if (layer_state_is(LAYER_RAISE)) {
-//                 tap_code(KC_RIGHT);
-//     #ifdef RGBLIGHT_ENABLE
-//             } else if (layer_state_is(LAYER_LOWER)) {
-//                 rgblight_increase_val_noeeprom();
-//     #endif
-//             } else {
-//                 tap_code(KC_VOLU);
-//             }
-//         } else {
-//             if (layer_state_is(LAYER_RAISE)) {
-//                 tap_code(KC_LEFT);
-//     #ifdef RGBLIGHT_ENABLE
-//             } else if (layer_state_is(LAYER_LOWER)) {
-//                 rgblight_decrease_val_noeeprom();
-//     #endif
-//             } else {
-//                 tap_code(KC_VOLD);
-//             }
-//         }
-//     } else if (index == 1) {
-//         if (clockwise) {
-//             if (layer_state_is(LAYER_RAISE)) {
-//                 tap_code(KC_DOWN);
-//     #ifdef RGBLIGHT_ENABLE
-// 	    } else if (layer_state_is(LAYER_LOWER)) {
-//                 rgblight_decrease_speed_noeeprom();
-//     #endif
-//             } else {
-//                 tap_code(KC_WH_D);
-//             }
-//         } else {
-//             if (layer_state_is(LAYER_RAISE)) {
-//                 tap_code(KC_UP);
-//     #ifdef RGBLIGHT_ENABLE
-//             } else if (layer_state_is(LAYER_LOWER)) {
-//                 rgblight_increase_speed_noeeprom();
-//     #endif
-//             } else {
-//                 tap_code(KC_WH_U);
-//             }
-//         }
-//     }
-//     return true;
-// }
-// #endif

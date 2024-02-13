@@ -20,6 +20,9 @@
 #include "tracdactyl.h"
 #include "transactions.h"
 #include <string.h>
+#include <math.h>
+
+#define TB_ACCELERATION
 
 #ifdef CONSOLE_ENABLE
 #    include "print.h"
@@ -209,6 +212,13 @@ static void pointing_device_task_tracdactyl(report_mouse_t* mouse_report) {
 }
 
 report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
+#   if defined(TB_ACCELERATION)
+        float magnitude = sqrtf(mouse_report.x * mouse_report.x + mouse_report.y * mouse_report.y);
+        float adjusted_magnitude = powf(magnitude, 1.2f);
+
+        mouse_report.x = (int16_t)(mouse_report.x * adjusted_magnitude);
+        mouse_report.y = (int16_t)(mouse_report.y * adjusted_magnitude);
+#   endif
     if (is_keyboard_master()) {
         pointing_device_task_tracdactyl(&mouse_report);
         mouse_report = pointing_device_task_user(mouse_report);
