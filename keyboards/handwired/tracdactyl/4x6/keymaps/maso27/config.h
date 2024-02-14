@@ -27,8 +27,11 @@
 /* Tracdactyl-specific features. */
 
 #ifdef POINTING_DEVICE_ENABLE
-// Automatically enable the pointer layer when moving the trackball.  See also:
-// - `TRACDACTYL_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS`
-// - `TRACDACTYL_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD`
-// #define TRACDACTYL_AUTO_POINTER_LAYER_TRIGGER_ENABLE
+    // Automatically enable the pointer layer when moving the trackball.  See also:
+    // - `TRACDACTYL_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS`
+    // - `TRACDACTYL_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD`
+
+    // #define TRACDACTYL_AUTO_POINTER_LAYER_TRIGGER_ENABLE
+    #define TRACDACTYL_DRAGSCROLL_REVERSE_X
+    #define TB_ACCELERATION
 #endif // POINTING_DEVICE_ENABLE

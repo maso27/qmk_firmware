@@ -22,7 +22,7 @@
 #include <string.h>
 #include <math.h>
 
-#define TB_ACCELERATION
+// #define TB_ACCELERATION
 
 #ifdef CONSOLE_ENABLE
 #    include "print.h"
@@ -30,7 +30,7 @@
 
 #ifdef POINTING_DEVICE_ENABLE
 #    ifndef TRACDACTYL_MINIMUM_DEFAULT_DPI
-#        define TRACDACTYL_MINIMUM_DEFAULT_DPI 400
+#        define TRACDACTYL_MINIMUM_DEFAULT_DPI 800
 #    endif // TRACDACTYL_MINIMUM_DEFAULT_DPI
 
 #    ifndef TRACDACTYL_DEFAULT_DPI_CONFIG_STEP
@@ -214,7 +214,7 @@ static void pointing_device_task_tracdactyl(report_mouse_t* mouse_report) {
 report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
 #   if defined(TB_ACCELERATION)
         float magnitude = sqrtf(mouse_report.x * mouse_report.x + mouse_report.y * mouse_report.y);
-        float adjusted_magnitude = powf(magnitude, 1.2f);
+        float adjusted_magnitude = powf(magnitude, .2f);
 
         mouse_report.x = (int16_t)(mouse_report.x * adjusted_magnitude);
         mouse_report.y = (int16_t)(mouse_report.y * adjusted_magnitude);

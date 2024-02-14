@@ -43,9 +43,6 @@ enum custom_keycodes {
     PT_SLSH  = LT(LAYER_POINTER, KC_SLSH)
 };
 
-/** \brief Automatically enable sniping-mode on the pointer layer. */
-#define TRACDACTYL_AUTO_SNIPING_ON_LAYER LAYER_POINTER
-
 #ifdef TRACDACTYL_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 static uint16_t auto_pointer_layer_timer = 0;
 
@@ -95,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       RGB_RMOD, XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR,                       KC_LBRC, KC_RBRC, _______, _______, KC_BSLS,  _______,
   // ╰──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────╯
                     KC_CTLALTDEL, _______, RGB_MOD, KC_ULOCK, KC_SH_DEL,  _______, KC_ULOCK, KC_UNDS,  _______, _______,
-                                                     DM_RSTP, _______,                                        _______
+                                                     DM_RSTP, KC_ULOCK,                                        _______
   //                                      ╰───────────────────────────╯ ╰───────────────────────────╯
   ),
 
@@ -110,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_RCTL, XXXXXXX, XXXXXXX, XXXXXXX, KC_LPRN, KC_RPRN,                        XXXXXXX, KC_HOME, XXXXXXX, KC_END,  XXXXXXX, KC_ENT,
   // ╰──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────╯
                          _______, _______, _______, KC_ULOCK, KC_DEL,     _______, KC_ULOCK, KC_TILD, XXXXXXX, XXXXXXX,
-                                                     _______, _______,                                       XXXXXXX
+                                                    _______, KC_ULOCK,                                       XXXXXXX
   //                                      ╰───────────────────────────╯ ╰───────────────────────────╯
   ),
 
@@ -120,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
        RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, DPI_RMOD, DPI_MOD,                      S_D_RMOD, S_D_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
-       RGB_TOG, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                        XXXXXXX, KC_BTN1, KC_BTN3, KC_BTN2, KC_RGUI, XXXXXXX,
+       RGB_TOG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, KC_BTN1, KC_BTN3, KC_BTN2, KC_RGUI, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
       RGB_RMOD, _______, DRGSCRL, SNIPING, EE_CLR,  QK_BOOT,                        QK_BOOT, EE_CLR,  SNIPING, DRGSCRL, _______, XXXXXXX,
   // ╰──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────╯
@@ -173,9 +170,9 @@ void rgb_matrix_update_pwm_buffers(void);
 
 #ifdef ENCODER_ENABLE
     const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-        [0] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_WH_D, KC_WH_U)  },
-        [1] =   { ENCODER_CCW_CW(RGB_VAD, RGB_VAI),  ENCODER_CCW_CW(RGB_SPD, RGB_SPI)  },
-        [2] =   { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT), ENCODER_CCW_CW(KC_DOWN, KC_UP)  },
-        [3] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_WH_D, KC_WH_U)  }
+        [0] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_WH_U, KC_WH_D)  },
+        [1] =   { ENCODER_CCW_CW(RGB_VAD, RGB_VAI),  ENCODER_CCW_CW(RGB_SPI, RGB_SPD)  },
+        [2] =   { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT), ENCODER_CCW_CW(KC_UP, KC_DOWN)  },
+        [3] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_WH_U, KC_WH_D)  }
     };
 #endif
