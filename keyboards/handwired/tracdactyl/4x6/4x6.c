@@ -43,7 +43,7 @@
  *
  * Note: the LED config simulates 58 LEDs instead of the actual 56 to prevent
  * confusion when testing LEDs during assembly when handedness is not set
- * correctly.  Those fake LEDs are bound to the physical bottom-left corner.
+ * correctly.  Those fake LEDs are bound to the physical bottom-left corner.d
  */
 led_config_t g_led_config = { {
     /* Key Matrix to LED index. */
@@ -52,17 +52,20 @@ led_config_t g_led_config = { {
     {      21,     17,     13,      9,      5,      1 }, // Top row
     {      22,     18,     14,     10,      6,      2 }, // Middle row
     {      23,     19,     15,     11,      7,      3 }, // Bottom row
-    {      24,     25,     27,     27,     28,     29 }, // Thumb cluster
+    {  NO_LED, NO_LED,     24,     25, NO_LED, NO_LED }, // Last 2
+    {  NO_LED, NO_LED,     29,     27,     28,     26 }, // Thumb cluster
+
     // Right split.
     {      30,     34,     38,     42,     46,     50 }, // Num row
     {      31,     35,     39,     43,     47,     51 }, // Top row
     {      32,     36,     40,     44,     48,     52 }, // Middle row
     {      33,     37,     41,     45,     49,     53 }, // Bottom row
-    {      58,     57,     56,     55,     54, NO_LED }  // Thumb cluster
+    {  NO_LED, NO_LED,     58,     57, NO_LED, NO_LED }, // Last 2
+    {  NO_LED, NO_LED, NO_LED,     56,     55,     54 }  // Thumb cluster
 }, {
     /* LED index to physical position. */
     // Left split.
-    /* index=0  */ {  80,   0 }, {  80,  12 }, {  80,  24 }, {  80,  36 }, // col 6 (right most)
+    /* index=0  */ {  80,   0 }, {  80,  12 }, {  80,  24 }, {  80,  36 }, // col 6 (right most, left half)
     /* index=4  */ {  64,   0 }, {  64,  12 }, {  64,  24 }, {  64,  36 }, // col 5
     /* index=8  */ {  48,   0 }, {  48,  12 }, {  48,  24 }, {  48,  36 },
     /* index=12 */ {  32,   0 }, {  32,  12 }, {  32,  24 }, {  32,  36 },
@@ -76,7 +79,7 @@ led_config_t g_led_config = { {
     /* index=38 */ { 192,   0 }, { 192,  12 }, { 192,  24 }, { 192,  36 },
     /* index=42 */ { 176,   0 }, { 176,  12 }, { 176,  24 }, { 176,  36 },
     /* index=46 */ { 160,   0 }, { 160,  12 }, { 160,  24 }, { 160,  36 },
-    /* index=50 */ { 144,   0 }, { 144,  12 }, { 144,  24 }, { 144,  36 },
+    /* index=50 */ { 144,   0 }, { 144,  12 }, { 144,  24 }, { 144,  36 }, // col 7 (left most, right half)
     /* index=54 */ { 112,  60 }, { 128,  60 }, { 144,  60 }, // Lower thumb row
     /* index=57 */ { 160,  48 }, { 176,  48 }
 }, {
@@ -88,8 +91,10 @@ led_config_t g_led_config = { {
     /* index=12 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
     /* index=16 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
     /* index=20 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
-    /* index=24 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_INDICATOR, LED_FLAG_INDICATOR, // Thumb cluster top
-    /* index=28 */ LED_FLAG_INDICATOR, LED_FLAG_INDICATOR,                    // Thumb cluster bottom
+    // /* index=24 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_INDICATOR, LED_FLAG_INDICATOR, // Thumb cluster top
+    // /* index=28 */ LED_FLAG_INDICATOR, LED_FLAG_INDICATOR,                    // Thumb cluster bottom
+    /* index=24 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, // Thumb cluster top
+    /* index=28 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,                    // Thumb cluster bottom
     // Right split.
     /* index=30 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, // col 12
     /* index=34 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, // col 11
@@ -97,7 +102,9 @@ led_config_t g_led_config = { {
     /* index=42 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
     /* index=46 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
     /* index=50 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
-    /* index=54 */ LED_FLAG_INDICATOR, LED_FLAG_INDICATOR, LED_FLAG_INDICATOR, // Thumb cluster
+    // /* index=54 */ LED_FLAG_INDICATOR, LED_FLAG_INDICATOR, LED_FLAG_INDICATOR, // Thumb cluster
+    // /* index=57 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT                    // Final bottom 2 keys
+    /* index=54 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, // Thumb cluster
     /* index=57 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT                    // Final bottom 2 keys
 } };
 #endif
