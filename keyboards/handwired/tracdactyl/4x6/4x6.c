@@ -91,10 +91,10 @@ led_config_t g_led_config = { {
     /* index=12 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
     /* index=16 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
     /* index=20 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
-    // /* index=24 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_INDICATOR, LED_FLAG_INDICATOR, // Thumb cluster top
-    // /* index=28 */ LED_FLAG_INDICATOR, LED_FLAG_INDICATOR,                    // Thumb cluster bottom
-    /* index=24 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, // Thumb cluster top
-    /* index=28 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,                    // Thumb cluster bottom
+    /* index=24 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_INDICATOR, LED_FLAG_INDICATOR, // Thumb cluster top
+    /* index=28 */ LED_FLAG_INDICATOR, LED_FLAG_INDICATOR,                    // Thumb cluster bottom
+    // /* index=24 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, // Thumb cluster top
+    // /* index=28 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,                    // Thumb cluster bottom
     // Right split.
     /* index=30 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, // col 12
     /* index=34 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, // col 11
@@ -102,10 +102,10 @@ led_config_t g_led_config = { {
     /* index=42 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
     /* index=46 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
     /* index=50 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
-    // /* index=54 */ LED_FLAG_INDICATOR, LED_FLAG_INDICATOR, LED_FLAG_INDICATOR, // Thumb cluster
-    // /* index=57 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT                    // Final bottom 2 keys
-    /* index=54 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, // Thumb cluster
+    /* index=54 */ LED_FLAG_INDICATOR, LED_FLAG_INDICATOR, LED_FLAG_INDICATOR, // Thumb cluster
     /* index=57 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT                    // Final bottom 2 keys
+    // /* index=54 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, // Thumb cluster
+    // /* index=57 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT                    // Final bottom 2 keys
 } };
 #endif
 // clang-format on

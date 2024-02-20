@@ -16,7 +16,7 @@
     },
     "diode_direction": "COL2ROW",
     "split": {
-        "soft_serial_pin": "GP1",
+        "soft_serial_pin": "GP0",
         "bootmagic": { "matrix": [0, 0] }
     },
     "transport": {
@@ -40,7 +40,7 @@
         "driver": "ws2812"
     },
     "ws2812": {
-        "pin": "GP0",
+        "pin": "GP1",
         "driver": "vendor"
     },
     "rgblight": {

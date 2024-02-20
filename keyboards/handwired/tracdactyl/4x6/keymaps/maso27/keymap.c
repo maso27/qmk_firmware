@@ -38,7 +38,7 @@ enum custom_keycodes {
     KC_CTLALTDEL = LCTL(LALT(KC_DEL)),
     KC_KILL  = LALT(KC_F4),
     KC_SH_DEL = LSFT(KC_DEL),
-    PT_MOUSE = TT(LAYER_POINTER),
+    KC_MOUSE = TT(LAYER_POINTER),
     PT_Z     = LT(LAYER_POINTER, KC_Z),
     PT_SLSH  = LT(LAYER_POINTER, KC_SLSH)
 };
@@ -77,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_LCTL,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,                           KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH, SC_SENT,
   // ╰──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────╯
                          KC_LGUI, KC_LALT, KC_MUTE, KC_LOWER, KC_BSPC,   KC_SPC, KC_RAISE,  KC_MINS,    KC_EQL, KC_BSLS,
-                                                    DM_PLY1, PT_MOUSE,                                        KC_MS_BTN1
+                                                    DM_PLY1, KC_MOUSE,                                        KC_MS_BTN1
   //                                      ╰───────────────────────────╯ ╰───────────────────────────╯
   ),
 
