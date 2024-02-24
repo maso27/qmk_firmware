@@ -45,9 +45,9 @@
 // Startup values.
 #    define RGB_MATRIX_DEFAULT_VAL 64
 
-// Rainbow swirl as startup mode.
-#    define ENABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
-#    define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_CYCLE_LEFT_RIGHT
+// Typing heatmap as startup mode.
+#    define ENABLE_RGB_MATRIX_TYPING_HEATMAP
+#    define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_TYPING_HEATMAP
 
 // Slow swirl at startup.
 #    define RGB_MATRIX_DEFAULT_SPD 32
