@@ -107,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_RCTL, XXXXXXX, XXXXXXX, XXXXXXX, KC_LPRN, KC_RPRN,                        XXXXXXX, KC_HOME, XXXXXXX, KC_END,  XXXXXXX, KC_ENT,
   // ╰──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────╯
                          _______, _______, _______, KC_ULOCK, KC_DEL,     _______, KC_ULOCK, KC_TILD, XXXXXXX, XXXXXXX,
-                                                    _______, KC_ULOCK,                                       XXXXXXX
+                                                    DM_REC1, KC_ULOCK,                                       XXXXXXX
   //                                      ╰───────────────────────────╯ ╰───────────────────────────╯
   ),
 
@@ -115,14 +115,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭──────────────────────────────────────────────────────╮                     ╭──────────────────────────────────────────────────────╮
        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
-       RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, DPI_RMOD, DPI_MOD,                      S_D_RMOD, S_D_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       RGB_MOD, RGB_VAI, RGB_SPI, XXXXXXX, DPI_RMOD, DPI_MOD,                      S_D_RMOD, S_D_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
-       RGB_TOG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, KC_BTN1, KC_BTN3, KC_BTN2, KC_RGUI, XXXXXXX,
+      RGB_RMOD, RGB_VAD, RGB_SPD, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, KC_BTN1, KC_BTN3, KC_BTN2, KC_RGUI, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
-      RGB_RMOD, _______, DRGSCRL, SNIPING, EE_CLR,  QK_BOOT,                        QK_BOOT, EE_CLR,  SNIPING, DRGSCRL, _______, XXXXXXX,
+       RGB_TOG, _______, DRGSCRL, SNIPING, EE_CLR,  QK_BOOT,                        QK_BOOT, EE_CLR,  SNIPING, DRGSCRL, _______, XXXXXXX,
   // ╰──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────╯
-                         _______, _______, _______, KC_BTN1, KC_BTN2,     KC_BTN1, KC_BTN2, KC_ULOCK, XXXXXXX, XXXXXXX,
-                                                    KC_BTN3, KC_ULOCK,                                        KC_BTN3
+                         _______, _______, _______, KC_ULOCK, KC_DEL,     KC_BTN1, KC_ULOCK, KC_BTN2, XXXXXXX, XXXXXXX,
+                                                    XXXXXXX, KC_ULOCK,                                        KC_BTN3
   //                                      ╰───────────────────────────╯ ╰───────────────────────────╯
   ),
 };
@@ -166,6 +166,9 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 #ifdef RGB_MATRIX_ENABLE
 // Forward-declare this helper function since it is defined in rgb_matrix.c.
 void rgb_matrix_update_pwm_buffers(void);
+
+#include "rgb_led.c"
+
 #endif
 
 #ifdef ENCODER_ENABLE

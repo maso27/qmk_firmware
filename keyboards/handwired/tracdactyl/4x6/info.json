@@ -37,7 +37,8 @@
         ]
     },
     "rgb_matrix": {
-        "driver": "ws2812"
+        "driver": "ws2812",
+        "split_count": [30, 29]
     },
     "ws2812": {
         "pin": "GP1",
@@ -46,7 +47,9 @@
     "rgblight": {
         "led_count": 59,
         "max_brightness": 80,
-        "split_count": [30, 29]
+        "split_count": [30, 29],
+        "sleep": true,
+        "split": true
     },
     "usb": {
         "device_version": "2.0.0",
