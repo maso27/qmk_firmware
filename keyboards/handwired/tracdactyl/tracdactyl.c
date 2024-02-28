@@ -22,11 +22,14 @@
 #include <string.h>
 #include <math.h>
 
+#include "led_matrix.c"
+
 // #define TB_ACCELERATION
 
 #ifdef CONSOLE_ENABLE
 #    include "print.h"
 #endif // CONSOLE_ENABLE
+
 
 #ifdef POINTING_DEVICE_ENABLE
 #    ifndef TRACDACTYL_MINIMUM_DEFAULT_DPI
@@ -378,20 +381,6 @@ void housekeeping_task_kb(void) {
 }
 #    endif // TRACDACTYL_CONFIG_SYNC
 #endif     // POINTING_DEVICE_ENABLE
-
-#if defined(KEYBOARD_bastardkb_tracdactyl_3x5_blackpill) || defined(KEYBOARD_bastardkb_tracdactyl_4x6_blackpill)
-void keyboard_pre_init_kb(void) {
-    setPinInputHigh(A0);
-    keyboard_pre_init_user();
-}
-
-void matrix_scan_kb(void) {
-    if (!readPin(A0)) {
-        reset_keyboard();
-    }
-    matrix_scan_user();
-}
-#endif // KEYBOARD_bastardkb_tracdactyl_3x5_blackpill || KEYBOARD_bastardkb_tracdactyl_4x6_blackpill
 
 bool shutdown_kb(bool jump_to_bootloader) {
     if (!shutdown_user(jump_to_bootloader)) {

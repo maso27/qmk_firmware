@@ -1,29 +1,29 @@
-# Tracdactyl (6x4, 5x3 "Nano")
+# Tracdactyl
 
 An ergonomic keyboard with integrated trackball.
 
 Engineered to be a full mouse replacement solution with high-quality, custom-developed components.
 
-There are 6x4 and 5x3 "Nano" versions.
+Keyboard case generated from [Wylderbuilds Github](https://github.com/bullwinkle3000/dactyl-keyboard)
+-   Left hand: dactyl_mini
+-   Right hand: minithicc3
 
--   Keyboard Maintainer: [Bastard Keyboards](https://github.com/Bastardkb)
--   Hardware Supported: elite-C V4
--   Hardware Availability: [Bastard Keyboards](https://bastardkb.com)
+Keyboard code leveraged from [Bastard Keyboards' Charybdis](https://github.com/qmk/qmk_firmware/tree/master/keyboards/bastardkb/charybdis)
+
+For notes on how to operate the trackball's Pointer Layer, see [this guide](https://www.youtube.com/watch?v=XjFAvW-78bE)
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information.
 
 Brand new to QMK? Start with the [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
 
-Check out the [keyboard build guides](https://docs.bastardkb.com) for the Tracdactyl and other ergonomic keyboards.
+Check out the [keyboard build guides](https://wylderbuilds.com/building-it) for notes on how to build the keyboard
 
 ## Building the firmware
-
-**You must specify the shield version when compiling/flashing the firmware.**
 
 The template is:
 
 ```shell
-qmk compile -kb bastardkb/tracdactyl/{LAYOUT}/{VERSION}/elitec -km {KEYMAP}
+qmk compile -kb handwired/tracdactyl -km maso27
 ```
 
 See below for populated commands per layout
@@ -32,27 +32,13 @@ The `default` keymap is inspired from the original [Dactyl Manuform](../../handw
 
 Check out the `via` layout if you're looking for VIA support.
 
-### Tracdactyl (4x6)
-
-| Shield Version | default                                                         | via                                                         |
-| -------------- | --------------------------------------------------------------- | ----------------------------------------------------------- |
-| v1             | `qmk compile -kb bastardkb/tracdactyl/4x6/v1/elitec -km default` | `qmk compile -kb bastardkb/tracdactyl/4x6/v1/elitec -km via` |
-| v2             | `qmk compile -kb bastardkb/tracdactyl/4x6/v2/elitec -km default` | `qmk compile -kb bastardkb/tracdactyl/4x6/v2/elitec -km via` |
-
-### Tracdactyl (3x5)
-
-| Shield Version | default                                                         | via                                                         |
-| -------------- | --------------------------------------------------------------- | ----------------------------------------------------------- |
-| v1             | `qmk compile -kb bastardkb/tracdactyl/3x5/v1/elitec -km default` | `qmk compile -kb bastardkb/tracdactyl/3x5/v1/elitec -km via` |
-| v2             | `qmk compile -kb bastardkb/tracdactyl/3x5/v2/elitec -km default` | `qmk compile -kb bastardkb/tracdactyl/3x5/v2/elitec -km via` |
-
 ## Customizing the firmware
 
 ### Dynamic DPI scaling
 
 The pointer's DPI can be changed at runtime.
 
-By default, the DPI is set to `400`. The Tracdactyl supports up to 16 different DPI values. By default, it cycles between `400` and `3400`, with a step of `200` (_ie._ `400`, `600`, `800`, …, `3400`).
+By default, the DPI is set to `800`. The Tracdactyl supports up to 16 different DPI values. By default, it cycles between `400` and `3400`, with a step of `200` (_ie._ `400`, `600`, `800`, …, `3400`).
 
 Calling `tracdactyl_cycle_pointer_default_dpi(bool forward)` will cycle forward or backward the possible values.
 
@@ -67,6 +53,14 @@ This behavior can be further customized with the following defines:
 #define TRACDACTYL_DEFAULT_DPI_CONFIG_STEP 200
 ```
 
+### Trackball acceleration
+
+The speed of motion can be used to determine distance traveled.
+To enable this, use the following define:
+
+```c
+#define TB_ACCELERATION
+```
 ### Drag-scroll
 
 Drag-scroll enables scrolling with the trackball. When drag-scroll is enabled, the trackball's `x` and `y` movements are converted into `h` (horizontal) and `v` (vertical) movement, effectively sending scroll instructions to the host system.

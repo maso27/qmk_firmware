@@ -18,6 +18,9 @@
 
 #pragma once
 
+/* Trackball angle adjustment. */
+#define ROTATIONAL_TRANSFORM_ANGLE -25
+#define POINTING_DEVICE_ROTATION_180
 
 /* Pointing device configuration. */
 
@@ -33,6 +36,25 @@
 // Invert X axis on mouse reports.
 #define POINTING_DEVICE_INVERT_X
 
+/* Handedness. */
+#define MASTER_LEFT
+
+// To use the handedness pin, resistors need to be installed on the adapter PCB.
+// If so, uncomment the following code, and undefine MASTER_LEFT above.
+// #define SPLIT_HAND_PIN GP15
+// #define SPLIT_HAND_PIN_LOW_IS_LEFT  // High -> right, Low -> left.
+
+/* SPI & PMW3389 settings. */
+#define SPI_DRIVER SPID0
+#define SPI_SCK_PIN GP22
+#define SPI_MISO_PIN GP16
+#define SPI_MOSI_PIN GP23
+#define POINTING_DEVICE_CS_PIN GP17
+
+/* Reset. */
+#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
+#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 1000U
+
 /* RGB matrix support. */
 #ifdef RGB_MATRIX_ENABLE
 #    define SPLIT_TRANSPORT_MIRROR
@@ -41,6 +63,10 @@
 #    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 255
 #    define RGB_DISABLE_WHEN_USB_SUSPENDED
 #    define RGB_MATRIX_KEYPRESSES
+
+#    define RGB_MATRIX_LED_COUNT 59
+#    define RGB_MATRIX_SPLIT \
+        { 30, 29 }
 
 // Startup values.
 #    define RGB_MATRIX_DEFAULT_VAL 64

@@ -115,13 +115,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭──────────────────────────────────────────────────────╮                     ╭──────────────────────────────────────────────────────╮
        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
-       RGB_MOD, RGB_VAI, RGB_SPI, XXXXXXX, DPI_RMOD, DPI_MOD,                      S_D_RMOD, S_D_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       _______, RGB_MOD, RGB_VAI, RGB_SPI, S_D_MOD, DPI_MOD,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
-      RGB_RMOD, RGB_VAD, RGB_SPD, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, KC_BTN1, KC_BTN3, KC_BTN2, KC_RGUI, XXXXXXX,
+      _______, RGB_RMOD, RGB_VAD, RGB_SPD, S_D_RMOD, DPI_RMOD,                      XXXXXXX, KC_BTN1, KC_BTN3, KC_BTN2, KC_RGUI, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
-       RGB_TOG, _______, DRGSCRL, SNIPING, EE_CLR,  QK_BOOT,                        QK_BOOT, EE_CLR,  SNIPING, DRGSCRL, _______, XXXXXXX,
+       _______, _______, DRGSCRL, SNIPING, EE_CLR,  QK_BOOT,                        QK_BOOT, EE_CLR,  SNIPING, DRGSCRL, _______, XXXXXXX,
   // ╰──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────╯
-                         _______, _______, _______, KC_ULOCK, KC_DEL,     KC_BTN1, KC_ULOCK, KC_BTN2, XXXXXXX, XXXXXXX,
+                         _______, _______, RGB_TOG, KC_ULOCK, KC_DEL,     KC_BTN1, KC_ULOCK, KC_BTN2, XXXXXXX, XXXXXXX,
                                                     XXXXXXX, KC_ULOCK,                                        KC_BTN3
   //                                      ╰───────────────────────────╯ ╰───────────────────────────╯
   ),
