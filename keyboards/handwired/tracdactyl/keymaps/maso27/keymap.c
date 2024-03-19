@@ -40,7 +40,8 @@ enum custom_keycodes {
     KC_SH_DEL = LSFT(KC_DEL),
     KC_MOUSE = TT(LAYER_POINTER),
     PT_Z     = LT(LAYER_POINTER, KC_Z),
-    PT_SLSH  = LT(LAYER_POINTER, KC_SLSH)
+    PT_SLSH  = LT(LAYER_POINTER, KC_SLSH),
+    PT_SCLN  = LT(LAYER_POINTER, KC_SCLN)
 };
 
 #ifdef TRACDACTYL_AUTO_POINTER_LAYER_TRIGGER_ENABLE
@@ -72,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
         KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                           KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
-       KC_LSFT,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                           KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
+       KC_LSFT,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                           KC_H,    KC_J,    KC_K,    KC_L, PT_SCLN, KC_QUOT,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
        KC_LCTL,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,                           KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH, SC_SENT,
   // ╰──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────╯
@@ -117,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
        _______, RGB_MOD, RGB_VAI, RGB_SPI, S_D_MOD, DPI_MOD,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
-      _______, RGB_RMOD, RGB_VAD, RGB_SPD, S_D_RMOD, DPI_RMOD,                      XXXXXXX, KC_BTN1, KC_BTN3, KC_BTN2, KC_RGUI, XXXXXXX,
+      _______, RGB_RMOD, RGB_VAD, RGB_SPD, S_D_RMOD, DPI_RMOD,                      XXXXXXX, KC_BTN1, KC_BTN3, KC_BTN2, _______, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
        _______, _______, DRGSCRL, SNIPING, EE_CLR,  QK_BOOT,                        QK_BOOT, EE_CLR,  SNIPING, DRGSCRL, _______, XXXXXXX,
   // ╰──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────╯
