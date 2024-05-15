@@ -216,11 +216,17 @@ static void pointing_device_task_tracdactyl(report_mouse_t* mouse_report) {
 
 report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
 #   if defined(TB_ACCELERATION)
-        float magnitude = sqrtf(mouse_report.x * mouse_report.x + mouse_report.y * mouse_report.y);
-        float adjusted_magnitude = powf(magnitude, .2f);
+        // float magnitude = sqrtf(mouse_report.x * mouse_report.x + mouse_report.y * mouse_report.y);
+        // float adjusted_magnitude = powf(magnitude, .2f);
+        // mouse_report.x = (int16_t)(mouse_report.x * adjusted_magnitude);
+        // mouse_report.y = (int16_t)(mouse_report.y * adjusted_magnitude);
 
-        mouse_report.x = (int16_t)(mouse_report.x * adjusted_magnitude);
-        mouse_report.y = (int16_t)(mouse_report.y * adjusted_magnitude);
+        float x_val = mouse_report.x;
+        float y_val = mouse_report.y;
+        float adjusted_magnitude = powf(x_val*x_val + y_val*y_val, 0.1f);
+
+        mouse_report.x = (int16_t)(lroundf(x_val * adjusted_magnitude));
+        mouse_report.y = (int16_t)(lroundf(y_val * adjusted_magnitude));
 #   endif
     if (is_keyboard_master()) {
         pointing_device_task_tracdactyl(&mouse_report);
