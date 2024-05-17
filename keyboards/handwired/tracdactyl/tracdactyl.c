@@ -224,7 +224,7 @@ report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
         float x_val = mouse_report.x;
         float y_val = mouse_report.y;
         // float adjusted_magnitude = powf(x_val*x_val + y_val*y_val, 0.1f);
-        float adjusted_magnitude = powf(x_val*x_val + y_val*y_val, 0.2f)/2.5;
+        float adjusted_magnitude = powf(x_val*x_val + y_val*y_val, 0.2f)/2;
 
         mouse_report.x = (int16_t)(lroundf(x_val * adjusted_magnitude));
         mouse_report.y = (int16_t)(lroundf(y_val * adjusted_magnitude));
