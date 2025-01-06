@@ -86,11 +86,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭──────────────────────────────────────────────────────╮                     ╭──────────────────────────────────────────────────────╮
        KC_KILL,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                         KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
-       RGB_MOD,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,     KC_0,   KC_F12,
+       XXXXXXX,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,     KC_0,   KC_F12,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
-       RGB_TOG, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                       KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,  KC_PIPE,
+       XXXXXXX, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                       KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,  KC_PIPE,
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
-      RGB_RMOD, XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR,                       KC_LBRC, KC_RBRC, _______, _______, KC_BSLS,  _______,
+       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR,                       KC_LBRC, KC_RBRC, _______, _______, KC_BSLS,  _______,
   // ╰──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────╯
                     KC_CTLALTDEL, _______, RGB_MOD, KC_ULOCK, KC_SH_DEL,  _______, KC_ULOCK, KC_UNDS,  _______, _______,
                                                      DM_RSTP, KC_ULOCK,                                        _______
@@ -174,9 +174,9 @@ void rgb_matrix_update_pwm_buffers(void);
 
 #ifdef ENCODER_ENABLE
     const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-        [0] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_WH_U, KC_WH_D)  },
-        [1] =   { ENCODER_CCW_CW(RGB_VAD, RGB_VAI),  ENCODER_CCW_CW(RGB_SPI, RGB_SPD)  },
-        [2] =   { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT), ENCODER_CCW_CW(KC_UP, KC_DOWN)  },
-        [3] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_WH_U, KC_WH_D)  }
+        [0] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_WH_D, KC_WH_U)  },
+        [1] =   { ENCODER_CCW_CW(RGB_VAD, RGB_VAI),  ENCODER_CCW_CW(RGB_SPD, RGB_SPI)  },
+        [2] =   { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT), ENCODER_CCW_CW(KC_DOWN, KC_UP)    },
+        [3] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_WH_D, KC_WH_U)  }
     };
 #endif
