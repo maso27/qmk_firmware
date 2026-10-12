@@ -162,8 +162,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_POINTER] = LAYOUT(
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  _______, XXXXXXX,  MS_UP,  XXXXXXX, XXXXXXX, XXXXXXX,                        MS_WHLU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
-  _______, MS_LEFT, MS_DOWN, MS_RGHT, XXXXXXX, XXXXXXX,                        MS_WHLD, MS_BTN1, MS_BTN3, MS_BTN2, _______, XXXXXXX,
+  _______, XXXXXXX, XXXXXXX,  MS_UP,  XXXXXXX, XXXXXXX,                        MS_WHLU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+  _______, XXXXXXX, MS_LEFT, MS_DOWN, MS_RGHT, XXXXXXX,                        MS_WHLD, MS_BTN1, MS_BTN3, MS_BTN2, _______, XXXXXXX,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  _______,    _______,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
                    _______, _______, _______, _______, _______,      _______, _______, _______, _______, _______
 )

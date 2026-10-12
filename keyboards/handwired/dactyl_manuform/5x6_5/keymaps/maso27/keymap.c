@@ -119,11 +119,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // ╭──────────────────────────────────────────────────────╮                         ╭──────────────────────────────────────────────────────╮
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     // ├──────────────────────────────────────────────────────┤                         ├──────────────────────────────────────────────────────┤
-        _______, _______,  MS_UP,  _______, _______, _______,                            MS_WHLU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        _______, XXXXXXX, XXXXXXX,  MS_UP,  XXXXXXX, XXXXXXX,                            MS_WHLU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     // ├──────────────────────────────────────────────────────┤                         ├──────────────────────────────────────────────────────┤
-        _______, MS_LEFT, MS_DOWN, MS_RGHT, _______, _______,                            MS_WHLD, MS_BTN1, MS_BTN2, MS_BTN3, _______, XXXXXXX,
+        _______, XXXXXXX, MS_LEFT, MS_DOWN, MS_RGHT, XXXXXXX,                            MS_WHLD, MS_BTN1, MS_BTN2, MS_BTN3, _______, XXXXXXX,
     // ├──────────────────────────────────────────────────────┤                         ├──────────────────────────────────────────────────────┤
-        _______, _______, _______, _______,  EE_CLR, QK_BOOT,                            QK_BOOT, EE_CLR,  XXXXXXX, XXXXXXX, _______, XXXXXXX,
+        _______, XXXXXXX, XXXXXXX, XXXXXXX,  EE_CLR, QK_BOOT,                            QK_BOOT, EE_CLR,  XXXXXXX, XXXXXXX, _______, XXXXXXX,
     // ╰──────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────╯
                     _______, _______,           _______, KC_ULOCK, _______,    _______, KC_ULOCK, _______,        _______, _______,
     //            ╰──────────────────╯         ╰──────────────────────────┤ ├──────────────────────────────╯    ╰──────────────────╯
