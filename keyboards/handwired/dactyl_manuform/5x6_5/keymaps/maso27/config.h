@@ -23,6 +23,14 @@
 // #define SPLIT_USB_DETECT
 
 #define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
+#define TAPPING_TOGGLE 2 // 2 taps toggles layer
+
+#define TAPPING_FORCE_HOLD
+#ifdef TAPPING_TERM
+    #undef TAPPING_TERM
+    #define TAPPING_TERM 200
+#endif
+#define ENCODER_DIRECTION_FLIP
 
 #ifdef ENCODER_ENABLE
     #define ENCODERS_PAD_A          {F5}
@@ -49,7 +57,7 @@
 
     #define RGBLIGHT_LAYERS
     #define RGBLIGHT_SLEEP
-    #define RGBLIGHT_MAX_LAYERS 5
+    #define RGBLIGHT_MAX_LAYERS 6
     
     #define RGBLIGHT_LED_COUNT 36
     #define RGBLED_SPLIT {18, 18}
