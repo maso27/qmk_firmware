@@ -7,6 +7,11 @@
         "pid": "0x0287",
         "device_version": "0.0.1"
     },
+    "rgblight": {
+        "led_count": 72,
+        "split_count": [36, 36],
+        "sleep": true
+    },
     "matrix_pins": {
         "cols": ["F6", "F7", "B1", "B3", "B2", "B6"],
         "rows": ["C6", "D7", "E6", "B4", "B5"]
