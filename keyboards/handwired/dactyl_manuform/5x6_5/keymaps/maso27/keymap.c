@@ -18,7 +18,7 @@ enum custom_keycodes {
     KC_ULOCK = TO(_BASE),
     KC_PRVWD = LCTL(KC_LEFT),
     KC_NXTWD = LCTL(KC_RIGHT),
-    KC_DWORD = LCTL(KC_DEL),
+    KC_DWORD = LCTL(KC_BSPC),
     KC_KILL = LALT(KC_F4),
     KC_CTLALTDEL = LCTL(LALT(KC_DEL)),
     KC_SH_DEL = LSFT(KC_DEL),
