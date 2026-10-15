@@ -15,6 +15,7 @@
 */
   #pragma once
 
+#define DYNAMIC_MACRO_SIZE 64
 
 //#define USE_MATRIX_I2C
 
@@ -40,7 +41,9 @@
     #undef TAPPING_TERM
     #define TAPPING_TERM 200
 #endif
-#define ENCODER_DIRECTION_FLIP
+#ifndef KEYBOARD_sofle_keyhive
+#    define ENCODER_DIRECTION_FLIP
+#endif
 
 
 #define RGBLIGHT_SLEEP

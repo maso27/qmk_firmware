@@ -34,7 +34,24 @@ const rgblight_segment_t PROGMEM pointer_layer[] = RGBLIGHT_LAYER_SEGMENTS({5, 3
 const rgblight_segment_t PROGMEM capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 18, HSV_RED}, {18, 18, HSV_RED});
 
 const rgblight_segment_t *const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(base_layer, gaming_layer, lower_layer, raise_layer, pointer_layer, capslock_layer);
-
+/* RGB LAYOUT
+* .-----------------------------------------.                                  .-----------------------------------------.
+* |      14     |      13     |      0      |                                  |      18     |      31     |      32     |
+* |------+------+-------------+------+------|                                  |------+------+------+------+------+------|
+* |      15     |      12     |      1      |                                  |      19     |      30     |      33     |
+* |------+------+------11-----+------+------|                                  |------+------+------29-----+------+------|
+* |      16     |      |      |      2      |                                  |      20     |      |      |      34     |
+* |------+------+------10-----+------|------|                                  |------+------+------28-----+------+------|
+* |      17     |      |      |      3      |                                  |      21     |      |      |      35     |
+* '--------------------9-------------|------/                                  \--------------------27-------------------'
+*               |      |      |    /  4    /---------------.    .---------------\    22 \    |      |      |
+*               |      8      |   /    5  /       /       /      \       \       \  23   \   |      26     |
+*               '-------------'  '-------/  6    /       /        \       \   24  \-------'  '-------------'
+*                                       /---------------/          \---------------\
+*                                      /       /       /            \       \       \
+*                                     /       /  7    /              \    25 \       \
+*                                    '---------------'                '---------------'
+*/    
 void keyboard_post_init_user(void) {
     rgblight_layers = rgb_layers;
 }
@@ -135,19 +152,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         if (layer_state_is(_RAISE)) {
-            tap_code(clockwise ? KC_VOLU : KC_VOLD);
+            tap_code(clockwise ? KC_RGHT : KC_LEFT);
         } else if (layer_state_is(_LOWER)) {
             tap_code(clockwise ? UG_VALU : UG_VALD);
+        } else if (layer_state_is(_GAMING)) {
+            tap_code(clockwise ? MS_RGHT : MS_LEFT);
         } else {
-            tap_code(clockwise ? KC_RGHT : KC_LEFT);
+            tap_code(clockwise ? KC_VOLU : KC_VOLD);
         }
     } else if (index == 1) {
-        if (layer_state_is(_LOWER)) {
+        if (layer_state_is(_RAISE)) {
+            tap_code(clockwise ? KC_UP : KC_DOWN);
+        } else if (layer_state_is(_LOWER)) {
             tap_code(clockwise ? UG_SPDU : UG_SPDD);
-        } else if (layer_state_is(_POINTER)) {
-            tap_code(clockwise ? MS_WHLU : MS_WHLD);
+        } else if (layer_state_is(_GAMING)) {
+            tap_code(clockwise ? MS_UP : MS_DOWN);
         } else {
-            tap_code(clockwise ? KC_DOWN : KC_UP);
+            tap_code(clockwise ? MS_WHLD : MS_WHLU);
         }
     }
     return true;

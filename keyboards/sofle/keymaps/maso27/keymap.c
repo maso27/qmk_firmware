@@ -44,7 +44,11 @@ enum custom_keycodes {
 };
 
 #ifdef RGBLIGHT_ENABLE
+#    ifdef KEYBOARD_sofle_keyhive
+    #include "rgb_led_keyhive.c"
+#    else
     #include "rgb_led.c"
+#    endif
 #endif
 
 #ifdef OLED_ENABLE
@@ -150,9 +154,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |  XX  |  XX  |  XX  |  XX  |  XX  |                    |  XX  |  XX  |  XX  |  XX  |  XX  |  XX  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      | RGBU | BRGHT| FAST |  XX  |  XX  |                    | WHLU |  XX  |  XX  |  XX  |  XX  |      |
+ * |      |  XX |   XX  |MS_UP |  XX  |  XX  |                    | WHLU |  XX  |  XX  |  XX  |  XX  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      | RGBD |  DIM | SLOW |  XX  |  XX  |-------.    ,-------| WHLD | BTN1 | BTN3 | BTN2 |      |  XX  |
+ * |      |  XX  |MS_LT |MS_DN |MS_RT |  XX  |-------.    ,-------| WHLD | BTN1 | BTN3 | BTN2 |      |  XX  |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |  XX  |  XX  |  XX  |  XX  |  XX  |-------|    |-------|  XX  |  XX  |  XX  | XX   |  XX  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'

@@ -30,7 +30,7 @@
     #undef TAPPING_TERM
     #define TAPPING_TERM 200
 #endif
-#define ENCODER_DIRECTION_FLIP
+// #define ENCODER_DIRECTION_FLIP
 
 #ifdef ENCODER_ENABLE
     #define ENCODERS_PAD_A          {F5}
@@ -49,7 +49,7 @@
     #define RGBLIGHT_EFFECT_RAINBOW_MOOD    // 160
     // #define RGBLIGHT_EFFECT_STATIC_GRADIENT // 168
     // #define RGBLIGHT_EFFECT_RAINBOW_SWIRL   // 192
-    // #define RGBLIGHT_EFFECT_BREATHING       // 348
+    #define RGBLIGHT_EFFECT_BREATHING       // 348
     // #define RGBLIGHT_EFFECT_KNIGHT          // 336
     // #define RGBLIGHT_EFFECT_SNAKE           // 406
     // #define RGBLIGHT_EFFECT_CHRISTMAS       // 508
