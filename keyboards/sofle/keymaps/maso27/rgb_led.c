@@ -31,7 +31,7 @@
     {SOFLE_RGBLIGHT_HALF_COUNT, SOFLE_RGBLIGHT_HALF_COUNT, hsv}
 #define SET_INDICATORS(hsv) \
     {0,     1,  HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS)}, \
-    {SOFLE_RGBLIGHT_HALF_COUNT, 1, hsv}
+    {SOFLE_RGBLIGHT_HALF_COUNT, 1, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS)}
 #define SET_UNDERGLOW(hsv) \
     {1,     6,  hsv}, \
     {SOFLE_RGBLIGHT_HALF_COUNT + 1, 6, hsv}
@@ -50,17 +50,17 @@
     {11,    2,  hsv}, \
     {21,    2,  hsv}, \
     {31,    2,  hsv}, \
-    {SOFLE_RGBLIGHT_RIGHT_LED(46), 3, hsv}, \
-    {SOFLE_RGBLIGHT_RIGHT_LED(57), 2, hsv}, \
-    {SOFLE_RGBLIGHT_RIGHT_LED(67), 2, hsv}
+    {46,    3,  hsv}, \
+    {57,    2,  hsv}, \
+    {67,    2,  hsv}
 #define SET_ARROWS(hsv) \
-    {SOFLE_RGBLIGHT_RIGHT_LED(55), 1, hsv}, \
-    {SOFLE_RGBLIGHT_RIGHT_LED(59), 2, hsv}, \
-    {SOFLE_RGBLIGHT_RIGHT_LED(65), 1, hsv}
+    {55,    1,  HSV_OVERRIDE_HELP(hsv, OVERRIDE_BRIGHTNESS)}, \
+    {59,    2,  HSV_OVERRIDE_HELP(hsv, OVERRIDE_BRIGHTNESS)}, \
+    {65,    1,  HSV_OVERRIDE_HELP(hsv, OVERRIDE_BRIGHTNESS)}
 #define SET_WASD(hsv) \
-    {14,    1,  hsv}, \
-    {19,    2,  hsv}, \
-    {24,    1,  hsv}
+    {14,    1,  HSV_OVERRIDE_HELP(hsv, OVERRIDE_BRIGHTNESS)}, \
+    {19,    2,  HSV_OVERRIDE_HELP(hsv, OVERRIDE_BRIGHTNESS)}, \
+    {24,    1,  HSV_OVERRIDE_HELP(hsv, OVERRIDE_BRIGHTNESS)}
 #define SET_INNER_COL(hsv)	\
     {32,    4,  hsv}, \
     {SOFLE_RGBLIGHT_HALF_COUNT + 32, 4, hsv}
@@ -75,12 +75,13 @@
     {SOFLE_RGBLIGHT_HALF_COUNT, 1, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS)}, \
     {1,     6,  hsv}, \
     {SOFLE_RGBLIGHT_HALF_COUNT + 1, 6, hsv}
-#define SET_BRACES(hsv)         \
+#define SET_LOWER(hsv) {26,  1,  hsv}
+#define SET_RAISE(hsv) {62,  1,  hsv}
+#define SET_BRACKETS(hsv)   \
     {28,    1,  hsv}, \
-    {SOFLE_RGBLIGHT_RIGHT_LED(35), 1, hsv}
-#define SET_BRACKETS(hsv)       \
-    {SOFLE_RGBLIGHT_RIGHT_LED(64), 1, hsv}, \
-    {SOFLE_RGBLIGHT_RIGHT_LED(71), 1, hsv}
+    {35,    1,  hsv}, \
+    {64,    1,  hsv}, \
+    {71,    1,  hsv}
 
 char layer_state_str[RGBLIGHT_LED_COUNT];
 
@@ -103,57 +104,61 @@ char layer_state_str[RGBLIGHT_LED_COUNT];
 
 const rgblight_segment_t PROGMEM my_base_layer[] = RGBLIGHT_LAYER_SEGMENTS(
   SET_LAYER_ID(HSV_BLUE),
-  {26,1,HSV_PURPLE},
-  {SOFLE_RGBLIGHT_RIGHT_LED(62),1,HSV_GREEN}
+  SET_UNDERGLOW(HSV_BLUE),
+  SET_LOWER(HSV_PURPLE),
+  SET_RAISE(HSV_GREEN)
 );
 const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
   SET_LAYER_ID(HSV_WHITE),
+  SET_UNDERGLOW(HSV_WHITE),
   SET_ARROWS(HSV_WHITE),
   SET_WASD(HSV_WHITE),
   {27,1,HSV_WHITE} // space key
 );
 const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
   SET_LAYER_ID(HSV_PURPLE),
+  SET_UNDERGLOW(HSV_PURPLE),
   SET_FNROW(HSV_PURPLE),
   SET_BRACKETS(HSV_PURPLE),
-  SET_BRACES(HSV_PURPLE),
   {7, 1,HSV_PURPLE}, // ctl-alt-del on windows key
-//  {8, 1,HSV_GREEN},  // R-ctrl on ctrl key
   {10,1,HSV_GREEN},  // real greaves key
   {11,1,HSV_RED},    // alt-F4 on Esc key
-  {17,1,HSV_RED},   // macro_stop
-  {SOFLE_RGBLIGHT_RIGHT_LED(53),1,HSV_PURPLE}  // _ on - key
+  {17,1,HSV_RED}   // macro_stop
 );
 const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
   SET_LAYER_ID(HSV_GREEN),
+  SET_UNDERGLOW(HSV_GREEN),
   SET_ARROWS(HSV_WHITE),
-  SET_BRACES(HSV_GREEN), // really parentheses
   {8, 1,HSV_GREEN}, // R-ctrl on ctrl key
   {13,1,HSV_GREEN},
   {17,1,HSV_BLUE},   // macro_rec
   {20,1,HSV_GREEN},
   {23,1,HSV_GREEN},
   {34,1,HSV_RED},   // capslock
-  {SOFLE_RGBLIGHT_RIGHT_LED(44),1,HSV_GREEN}, // enter (no shift)
-  {SOFLE_RGBLIGHT_RIGHT_LED(46),1,HSV_RED}, // delete
-  {SOFLE_RGBLIGHT_RIGHT_LED(49),2,HSV_RED}, // delete word and backspace
-  {SOFLE_RGBLIGHT_RIGHT_LED(53),2,HSV_GREEN}, // ~ and end
-//  {SOFLE_RGBLIGHT_RIGHT_LED(54),1,HSV_GREEN}, // end
-  {SOFLE_RGBLIGHT_RIGHT_LED(56),1,HSV_GREEN}, // next_word
-  {SOFLE_RGBLIGHT_RIGHT_LED(69),2,HSV_GREEN}, // pgup-pgdn
-  {SOFLE_RGBLIGHT_RIGHT_LED(66),1,HSV_GREEN}, // prev_word
-  {SOFLE_RGBLIGHT_RIGHT_LED(64),1,HSV_GREEN}  // home
+  {44,1,HSV_GREEN}, // enter (no shift)
+  {46,1,HSV_RED}, // delete
+  {49,2,HSV_RED}, // delete word and backspace
+  {53,2,HSV_GREEN}, // ~ and end
+//  {54,1,HSV_GREEN}, // end
+  {56,1,HSV_GREEN}, // next_word
+  {69,2,HSV_GREEN}, // pgup-pgdn
+  {66,1,HSV_GREEN}, // prev_word
+  {64,1,HSV_GREEN}  // home
 );
 const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
   SET_LAYER_ID(HSV_WHITE),
-  {SOFLE_RGBLIGHT_RIGHT_LED(55),2,HSV_WHITE}, // r-click
-  {SOFLE_RGBLIGHT_RIGHT_LED(60),2,HSV_WHITE}, // m-click
-  {SOFLE_RGBLIGHT_RIGHT_LED(65),2,HSV_WHITE}, // l-click
-  {SOFLE_RGBLIGHT_RIGHT_LED(69),2,HSV_WHITE}, // whl-up
-  {SOFLE_RGBLIGHT_RIGHT_LED(70),2,HSV_WHITE} // whl-dn
+  SET_UNDERGLOW(HSV_WHITE),
+  {19,1,HSV_WHITE}, // mouse left
+  {23,2,HSV_WHITE}, // mouse up/dn
+  {29,1,HSV_WHITE}, // mouse right
+  {55,1,HSV_WHITE}, // r-click
+  {60,1,HSV_WHITE}, // m-click
+  {65,1,HSV_WHITE}, // l-click
+  {69,2,HSV_WHITE}  // whl-up/dn
 );
 const rgblight_segment_t PROGMEM my_capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-  SET_LAYER_ID(HSV_RED)
+  SET_LAYER_ID(HSV_RED),
+  SET_UNDERGLOW(HSV_RED)
 );
 
 // Now define the array of layers. Later layers take precedence

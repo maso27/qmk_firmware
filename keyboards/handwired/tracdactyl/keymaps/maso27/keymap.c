@@ -1,19 +1,6 @@
-/**
- * Copyright 2021 Charly Delay <charly@codesink.dev> (@0xcharly)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// Copyright 2020 Maso27
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 #include QMK_KEYBOARD_H
 
 #ifdef TRACDACTYL_AUTO_POINTER_LAYER_TRIGGER_ENABLE
@@ -93,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR,                       KC_LBRC, KC_RBRC, _______, _______, KC_BSLS,  _______,
   // ╰──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────╯
                     KC_CTLALTDEL, _______, RM_NEXT, KC_ULOCK, KC_SH_DEL,  _______, KC_ULOCK, KC_UNDS,  _______, _______,
-                                                     DM_RSTP, KC_ULOCK,                                        _______
+                                                     DM_RSTP, KC_ULOCK,                                        RM_TOGG
   //                                      ╰───────────────────────────╯ ╰───────────────────────────╯
   ),
 
@@ -107,8 +94,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
        KC_RCTL, XXXXXXX, XXXXXXX, XXXXXXX, KC_LPRN, KC_RPRN,                        XXXXXXX, KC_HOME, XXXXXXX, KC_END,  XXXXXXX, KC_ENT,
   // ╰──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────╯
-                         _______, _______, _______, KC_ULOCK, KC_DEL,     _______, KC_ULOCK,  KC_GRV, XXXXXXX, XXXXXXX,
-                                                    DM_REC1, KC_ULOCK,                                       XXXXXXX
+                         _______, _______, _______, KC_ULOCK, KC_DEL,     _______, KC_ULOCK,  KC_GRV, _______, _______,
+                                                    DM_REC1, KC_ULOCK,                                       _______
   //                                      ╰───────────────────────────╯ ╰───────────────────────────╯
   ),
 
@@ -122,8 +109,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────┤
        _______, _______, DRGSCRL, SNIPING, EE_CLR,  QK_BOOT,                        QK_BOOT, EE_CLR,  SNIPING, DRGSCRL, _______, XXXXXXX,
   // ╰──────────────────────────────────────────────────────┤                     ├──────────────────────────────────────────────────────╯
-                         _______, _______, RM_TOGG, KC_ULOCK, KC_DEL,     MS_BTN1, KC_ULOCK, MS_BTN2, XXXXXXX, XXXXXXX,
-                                                    XXXXXXX, KC_ULOCK,                                        MS_BTN3
+                         _______, _______, _______, KC_ULOCK, _______,     MS_BTN1, KC_ULOCK, MS_BTN2, XXXXXXX, XXXXXXX,
+                                                    _______, KC_ULOCK,                                        MS_BTN3
   //                                      ╰───────────────────────────╯ ╰───────────────────────────╯
   ),
 };

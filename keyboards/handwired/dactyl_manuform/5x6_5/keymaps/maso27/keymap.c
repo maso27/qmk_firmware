@@ -84,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // ╰──────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────╯
                     KC_LGUI, KC_LALT,           KC_MUTE, KC_LOWER, KC_BSPC,  KC_SPC, KC_RAISE, TG(_GAMING),       KC_EQL, KC_BSLS,
     //            ╰──────────────────╯         ╰──────────────────────────┤ ├──────────────────────────────╯    ╰──────────────────╯
-                                                         DM_PLY1, KC_MOUSE,  MS_BTN1, MS_BTN3
+                                                         DM_PLY1, KC_MOUSE,  MS_BTN1, KC_MINS
     //                                                  ╰─────────────────╯ ╰────────────────╯  
     ),
     [_GAMING] = LAYOUT_5x6_5(
@@ -112,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // ├──────────────────────────────────────────────────────┤                         ├──────────────────────────────────────────────────────┤
         _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR,                            KC_LBRC, KC_RBRC, _______, _______, KC_BSLS,  _______,
     // ╰──────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────╯
-                KC_CTLALTDEL, _______,        RM_NEXT, KC_ULOCK, KC_SH_DEL,    _______, KC_ULOCK, KC_UNDS,        _______, _______,
+                KC_CTLALTDEL, _______,        RM_NEXT, KC_ULOCK, KC_SH_DEL,    _______, KC_ULOCK, RM_TOGG,        _______, _______,
     //            ╰──────────────────╯         ╰──────────────────────────┤ ├──────────────────────────────╯    ╰──────────────────╯
                                                          DM_RSTP, KC_ULOCK,  _______, _______
     //                                                  ╰─────────────────╯ ╰────────────────╯  
@@ -127,9 +127,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // ├──────────────────────────────────────────────────────┤                         ├──────────────────────────────────────────────────────┤
         KC_RCTL, XXXXXXX, XXXXXXX, XXXXXXX, KC_LPRN, KC_RPRN,                            XXXXXXX, KC_HOME, XXXXXXX, KC_END,  XXXXXXX, KC_ENT,
     // ╰──────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────╯
-                    _______, _______,            _______, KC_ULOCK, KC_DEL,   _______, KC_ULOCK, KC_GRV,          _______, _______,
+                    _______, _______,            _______, KC_ULOCK, KC_DEL,   _______, KC_ULOCK, _______,          _______, _______,
     //            ╰──────────────────╯         ╰──────────────────────────┤ ├──────────────────────────────╯    ╰──────────────────╯
-                                                         DM_REC1, KC_ULOCK,  _______, _______
+                                                         DM_REC1, KC_ULOCK,  _______,  KC_GRV
     //                                                  ╰─────────────────╯ ╰────────────────╯  
     ),
     [_POINTER] = LAYOUT_5x6_5(
@@ -149,6 +149,56 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 
+#ifdef ENCODER_ENABLE
+bool encoder_update_user(uint8_t index, bool clockwise) {
+    if (index == 0) {
+        if (clockwise) {
+            if (layer_state_is(_LOWER)) {
+                rgblight_increase_val_noeeprom();
+            } else if (layer_state_is(_RAISE)) {
+                tap_code(KC_RGHT);
+            } else if (layer_state_is(_GAMING)) {
+                tap_code(MS_RGHT);
+            } else {
+                tap_code(KC_VOLU);
+            }
+        } else {
+            if (layer_state_is(_LOWER)) {
+                rgblight_decrease_val_noeeprom();
+            } else if (layer_state_is(_RAISE)) {
+                tap_code(KC_LEFT);
+            } else if (layer_state_is(_GAMING)) {
+                tap_code(MS_LEFT);
+            } else {
+                tap_code(KC_VOLD);
+            }
+        }
+    } else if (index == 1) {
+        if (clockwise) {
+            if (layer_state_is(_LOWER)) {
+                rgblight_increase_speed_noeeprom();
+            } else if (layer_state_is(_RAISE)) {
+                tap_code(KC_UP);
+            } else if (layer_state_is(_GAMING)) {
+                tap_code(MS_UP);
+            } else {
+                tap_code(MS_WHLD); // scroll wheel down
+            }
+        } else {
+            if( layer_state_is(_LOWER)) {
+                rgblight_decrease_speed_noeeprom();
+            } else if (layer_state_is(_RAISE)) {
+                tap_code(KC_DOWN);
+            } else if (layer_state_is(_GAMING)) {
+                tap_code(MS_DOWN);
+            } else {
+                tap_code(MS_WHLU); // scroll wheel up
+            }
+        }
+    }
+    return false;
+}
+/*
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         if (layer_state_is(_RAISE)) {
@@ -173,3 +223,5 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     }
     return true;
 }
+*/
+#endif

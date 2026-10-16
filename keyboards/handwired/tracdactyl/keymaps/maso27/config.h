@@ -21,6 +21,16 @@
 #    define DYNAMIC_KEYMAP_LAYER_COUNT 4
 #endif // VIA_ENABLE
 
+/* read which hand is which (need to flash left and right bootloaders too)
+#ifdef MASTER_LEFT
+    #undef MASTER_LEFT
+#endif
+#ifdef MASTER_RIGHT
+    #undef MASTER_RIGHT
+#endif
+#define EE_HANDS
+*/
+
 /* Disable unused features. */
 #define NO_ACTION_ONESHOT
 

@@ -25,7 +25,7 @@
     {53, 2, HSV_OVERRIDE_HELP(hsv, OVERRIDE_BRIGHTNESS)}, \
     {59, 1, HSV_OVERRIDE_HELP(hsv, OVERRIDE_BRIGHTNESS)}
 #define SET_WASD(hsv) \
-    {8, 1, HSV_OVERRIDE_HELP(hsv, OVERRIDE_BRIGHTNESS)}, \
+    {8, 1,  HSV_OVERRIDE_HELP(hsv, OVERRIDE_BRIGHTNESS)}, \
     {14, 2, HSV_OVERRIDE_HELP(hsv, OVERRIDE_BRIGHTNESS)}, \
     {20, 1, HSV_OVERRIDE_HELP(hsv, OVERRIDE_BRIGHTNESS)}
 #define SET_FN_KEYS(hsv) \
@@ -60,18 +60,18 @@ const rgblight_segment_t PROGMEM my_base_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     SET_UNDERGLOW(HSV_WHITE),
     SET_WASD(HSV_WHITE),
-    SET_ARROWS(HSV_WHITE)
+    SET_ARROWS(HSV_WHITE),
+    {38, 1, HSV_WHITE} // space key
 );
 
 const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     SET_UNDERGLOW(HSV_PURPLE),
     SET_FN_KEYS(HSV_PURPLE),
     SET_BRACKETS(HSV_PURPLE),
+    {11, 1, HSV_PURPLE},
     {3, 1, HSV_GREEN},
     {5, 1, HSV_RED},
-    {11, 1, HSV_PURPLE},
-    {23, 1, HSV_RED},
-    {50, 1, HSV_PURPLE}
+    {23, 1, HSV_RED}
 );
 
 const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
@@ -96,15 +96,13 @@ const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 
 const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     SET_UNDERGLOW(HSV_WHITE),
-    {19, 1, HSV_WHITE},
-    {14, 1, HSV_WHITE},
-    {20, 1, HSV_WHITE},
-    {26, 1, HSV_WHITE},
-    {42, 1, HSV_WHITE},
-    {41, 1, HSV_WHITE},
-    {47, 1, HSV_WHITE},
-    {53, 1, HSV_WHITE},
-    {59, 1, HSV_WHITE}
+    {14, 1, HSV_WHITE}, // mouse left
+    {19, 2, HSV_WHITE}, // mouse up/dn
+    {26, 1, HSV_WHITE}, // mouse right
+    {41, 2, HSV_WHITE}, // whl up/dn
+    {47, 1, HSV_WHITE}, // l-click
+    {53, 1, HSV_WHITE}, // m-click
+    {59, 1, HSV_WHITE}  // r-click
 );
 
 const rgblight_segment_t PROGMEM my_capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS(

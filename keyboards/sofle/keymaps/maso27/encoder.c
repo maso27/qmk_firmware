@@ -16,17 +16,17 @@
   */
 
 //Setting up what encoder rotation does. If your encoder can be pressed as a button, that function can be set in Via.
-
+/*
 #ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [0] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(MS_WHLD, MS_WHLU)  },
     [1] =   { ENCODER_CCW_CW(MS_LEFT, MS_RGHT),  ENCODER_CCW_CW(MS_DOWN, MS_UP)    },
     [2] =   { ENCODER_CCW_CW(RGB_VAD, RGB_VAI),  ENCODER_CCW_CW(RGB_SPD, RGB_SPI)  },
-    [3] =   { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT), ENCODER_CCW_CW(MS_DOWN, MS_UP)    },
+    [3] =   { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT), ENCODER_CCW_CW(KC_DOWN, KC_UP)    },
     [4] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(MS_WHLD, MS_WHLU)  }
 };
 #endif
-
+*/
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
@@ -74,7 +74,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             }
         }
     }
-    return true;
+    return false;
 }
 
 #endif
